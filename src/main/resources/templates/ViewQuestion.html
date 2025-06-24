@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="${question.title} + ' - QuickNotes'">Question Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/images/logo.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
+
+<!-- NAVBAR -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight">QuickNotes</a>
+        <nav class="hidden md:flex items-center gap-8 text-lg font-medium">
+            <a href="/" class="hover:text-primary dark:hover:text-blue-400">Home</a>
+            <a href="/about" class="hover:text-primary dark:hover:text-blue-400">About</a>
+            <a href="/notes" class="hover:text-primary dark:hover:text-blue-400">Notes</a>
+            <a href="/questions" class="hover:text-primary dark:hover:text-blue-400 font-semibold">Questions</a>
+        </nav>
+    </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="flex-grow max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-blue-400 mb-2 text-center" th:text="${question.title}">Question Title</h1>
+    <p class="text-gray-300 text-center mb-8" th:text="${question.description}">Question description goes here.</p>
+
+    <div class="w-full aspect-[16/9] rounded-xl overflow-hidden shadow-xl border border-gray-700">
+        <iframe
+                th:src="${question.driveEmbedLink}"
+                frameborder="0"
+                allowfullscreen
+                class="w-full h-full">
+        </iframe>
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 p-10 text-center text-sm">
+    &copy; 2025 QuickNotes. Developed by Prasun Tripathi & Prabhas Budathoki.
+</footer>
+
+</body>
+</html>

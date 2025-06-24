@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <title>QuickNotes</title>
+    <link rel="icon" href="/images/logo.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans antialiased">
+
+<!-- NAVBAR -->
+<header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        role="banner"
+>
+    <div
+            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+    >
+        <!-- Brand -->
+        <a
+                href="/"
+                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >QuickNotes</a
+        >
+
+        <!-- Hamburger Button -->
+        <button
+                id="menu-toggle"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                aria-label="Toggle menu"
+        >
+            <svg
+                    class="w-7 h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+            </svg>
+        </button>
+
+        <!-- Desktop Nav -->
+        <nav
+                class="hidden md:flex items-center gap-8 text-lg font-medium"
+                role="navigation"
+                aria-label="Primary Navigation"
+        >
+            <a
+                    href="/"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Home</a
+            >
+            <a
+                    href="/about"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >About</a
+            >
+            <a
+                    href="/notes"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Notes</a
+            >
+            <a
+                    href="/questions"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Questions</a
+            >
+
+            <a
+                    href="register"
+                    class="px-5 py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+            >Register</a
+            >
+        </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav
+            id="mobile-menu"
+            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            role="navigation"
+            aria-label="Mobile Navigation"
+    >
+        <a
+                href="/"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Home</a
+        >
+        <a
+                href="/about"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >About</a
+        >
+        <a
+                href="/notes"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Notes</a
+        >
+        <a
+                href="/questions"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Questions</a
+        >
+        <a
+                href="/login"
+                class="block py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition focus:outline-none focus:ring-2 focus:ring-primary"
+        >Login</a
+        >
+        <a
+                href="/register"
+                class="block py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+        >Register</a
+        >
+    </nav>
+</header>
+
+<!-- Minimal JS for mobile toggle -->
+<script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggleButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        toggleButton.setAttribute('aria-expanded', String(!isHidden));
+    });
+</script>
+
+<!-- HERO SECTION -->
+<section
+        class="px-6 py-20 bg-white dark:bg-gray-900"
+        aria-label="Hero Section"
+>
+    <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10"
+    >
+        <!-- Text Left -->
+        <div class="w-full md:w-1/2 text-center md:text-left">
+            <h1
+                    class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white leading-snug mb-6"
+            >
+                Grade 12 Computer Science Notes & Questions
+            </h1>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
+                QuickNotes provides you with well-organized, NEB-based notes and
+                question sets for Class 12 Computer Science. Stay ahead with
+                simplified learning — all in one place.
+            </p>
+            <div
+                    class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start max-w-md mx-auto md:mx-0"
+            >
+                <a
+                        href="/notes"
+                        class="px-7 py-3 bg-primary text-white rounded-md text-lg font-semibold hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
+                >Explore Notes</a
+                >
+                <a
+                        href="/questions"
+                        class="px-7 py-3 border border-primary text-primary rounded-md text-lg font-semibold hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
+                >View Questions</a
+                >
+            </div>
+        </div>
+
+        <!-- Image Right (Bigger) -->
+        <div class="w-full md:w-1/2 flex justify-center">
+            <img
+                    src="/images/hero.png"
+                    alt="Study Illustration"
+                    class="rounded-3xl shadow-2xl w-full max-w-[580px] object-cover dark:brightness-90"
+                    loading="lazy"
+            />
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section
+        class="bg-gray-50 dark:bg-gray-900 py-20 px-6"
+        aria-label="Features Section"
+>
+    <div class="max-w-7xl mx-auto text-center mb-16 px-4 sm:px-0">
+        <h2
+                class="text-4xl font-extrabold text-gray-900 dark:text-white mb-5"
+        >
+            Why Choose QuickNotes?
+        </h2>
+        <p
+                class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed"
+        >
+            Simplify your learning with concise notes, curated question sets, and
+            easy access — all tailored for Grade 12 NEB Computer Science.
+        </p>
+    </div>
+
+    <div
+            class="max-w-7xl mx-auto grid gap-12 sm:grid-cols-2 md:grid-cols-3 px-4 sm:px-0"
+    >
+        <!-- Feature 1 -->
+        <article
+                class="bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-xl transform hover:scale-105 transition duration-300"
+        >
+            <div class="mb-6 text-blue-600 dark:text-blue-400">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="mx-auto h-16 w-16"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 14l9-5-9-5-9 5 9 5z"
+                    />
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M12 14l6.16-3.422a12.083 12.083 0 01.34 6.211L12 21l-6.5-4.211a12.084 12.084 0 01.34-6.21L12 14z"
+                    />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
+                Curated Notes
+            </h3>
+            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                Well-organized notes following the NEB syllabus, perfect for quick
+                revision and exam prep.
+            </p>
+        </article>
+
+        <!-- Feature 2 -->
+        <article
+                class="bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-xl transform hover:scale-105 transition duration-300"
+        >
+            <div class="mb-6 text-blue-600 dark:text-blue-400">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="mx-auto h-16 w-16"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M9 17v-6h13v6M9 12h13v-3H9M9 7h13v-3H9M4 20h2v-7H4v7z"
+                    />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
+                Downloadable Questions
+            </h3>
+            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                Easily download question sets to practice offline and ace your exams.
+            </p>
+        </article>
+
+        <!-- Feature 3 -->
+        <article
+                class="bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-xl transform hover:scale-105 transition duration-300"
+        >
+            <div class="mb-6 text-blue-600 dark:text-blue-400">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="mx-auto h-16 w-16"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M16 12H8m8 0v4a2 2 0 01-2 2H10a2 2 0 01-2-2v-4m8-4H8m8 0V8a2 2 0 00-2-2H10a2 2 0 00-2 2v4"
+                    />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
+                Email Notes
+            </h3>
+            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+                Get your notes emailed directly to you for convenience and quick
+                access anytime.
+            </p>
+        </article>
+    </div>
+</section>
+
+<section
+        class="bg-gray-50 dark:bg-gray-900 py-20 px-6"
+        aria-label="About the Developers"
+>
+    <div class="max-w-5xl mx-auto text-center">
+        <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8">
+            Meet the Developers
+        </h2>
+        <p class="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 text-lg leading-relaxed">
+            Prasun Tripathi and Prabhas Budathoki are two ambitious young developers, aged
+            17 and 16 respectively, who are passionate about digitalizing and simplifying
+            computer science education for Nepali students. Their goal is to make Grade 12
+            NEB Computer Science notes and question sets easily accessible, organized, and
+            user-friendly through <strong>QuickNotes</strong>.
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-12">
+            <!-- Prasun Card -->
+            <div
+                    class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 max-w-sm mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-4 hover:ring-blue-500 dark:hover:ring-blue-400 cursor-pointer"
+            >
+                <div
+                        class="w-28 h-28 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-5xl font-bold text-white mb-6 select-none"
+                >
+                    PT
+                </div>
+                <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+                    Prasun Tripathi
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                    A passionate 17-year-old developer, Prasun leads the backend and
+                    full-stack development of QuickNotes, determined to empower students
+                    through technology.
+                </p>
+            </div>
+
+            <!-- Prabhas Card -->
+            <div
+                    class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 max-w-sm mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-4 hover:ring-blue-500 dark:hover:ring-blue-400 cursor-pointer"
+            >
+                <div
+                        class="w-28 h-28 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-5xl font-bold text-white mb-6 select-none"
+                >
+                    PB
+                </div>
+                <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+                    Prabhas Budathoki
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                    At 16 years old, Prabhas shapes the design and user experience of QuickNotes,
+                    blending creativity with usability for an effective learning platform.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-white dark:bg-gray-900 py-20 px-6" aria-label="Contact Form Section">
+    <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6 text-center">
+            Get In Touch
+        </h2>
+        <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-xl mx-auto">
+            Questions? Need notes emailed? Drop us a message — we’ll get back to you fast.
+        </p>
+
+        <form action="/message" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Name -->
+            <div class="relative z-0 w-full group">
+                <input type="text" name="name" id="name" required
+                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400" />
+                <label for="name"
+                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                    Your Name
+                </label>
+            </div>
+
+            <!-- Email -->
+            <div class="relative z-0 w-full group">
+                <input type="email" name="email" id="email" required
+                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400" />
+                <label for="email"
+                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                    Your Email
+                </label>
+            </div>
+
+            <!-- Subject -->
+            <div class="relative z-0 w-full group md:col-span-2">
+                <input type="text" name="subject" id="subject"
+                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400" />
+                <label for="subject"
+                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                    Subject
+                </label>
+            </div>
+
+            <!-- Message -->
+            <div class="relative z-0 w-full group md:col-span-2">
+        <textarea name="message" id="message" rows="5" required
+                  class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400 resize-none"></textarea>
+                <label for="message"
+                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                    Your Message
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="md:col-span-2 flex justify-center">
+                <button type="submit"
+                        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-700">
+                    Send Message
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                         stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 13l4 4L19 7" />
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer
+        class="bg-gray-900 text-gray-300 py-16 px-6 select-none"
+        role="contentinfo"
+>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- About -->
+        <div>
+            <h3 class="text-xl font-bold text-white mb-4">QuickNotes</h3>
+            <p class="text-gray-400 leading-relaxed">
+                Your go-to hub for Grade 12 NEB Computer Science notes and question
+                sets.
+                <br />
+                Developed by <span class="text-blue-500">Prasun Tripathi</span> &
+                designed by <span class="text-blue-500">Prabhas Budathoki</span>.
+            </p>
+        </div>
+
+        <!-- Quick Links -->
+        <nav aria-label="Footer Navigation">
+            <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+            <ul class="space-y-3">
+                <li>
+                    <a
+                            href="/"
+                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    >Home</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/about"
+                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    >About</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/notes"
+                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    >Notes</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/questions"
+                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    >Questions</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/login"
+                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    >Login</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/register"
+                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    >Register</a
+                    >
+                </li>
+            </ul>
+        </nav>
+
+
+
+        <!-- Contact -->
+        <address class="not-italic space-y-2 text-gray-400">
+            <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+            <p>📍 Kathmandu, Nepal</p>
+            <p>📞 +977 9800000000</p>
+            <p>
+                ✉️
+                <a
+                        href="mailto:support@quicknotes.com"
+                        class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                >support@quicknotes.com</a
+                >
+            </p>
+        </address>
+
+        <!-- Social -->
+        <div>
+            <h3 class="text-xl font-bold text-white mb-4">Follow Us</h3>
+            <div class="flex space-x-6">
+                <a
+                        href="#"
+                        aria-label="Facebook"
+                        class="hover:text-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                >
+                    <svg
+                            class="w-6 h-6 fill-current"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                d="M22 12a10 10 0 10-11.6 9.8v-6.9h-2.9v-2.9h2.9v-2.2c0-2.9 1.7-4.5 4.2-4.5 1.2 0 2.5.2 2.5.2v2.7h-1.4c-1.4 0-1.8.9-1.8 1.8v2h3l-.5 2.9h-2.5v6.9A10 10 0 0022 12z"
+                        />
+                    </svg>
+                </a>
+                <a
+                        href="#"
+                        aria-label="Twitter"
+                        class="hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                >
+                    <svg
+                            class="w-6 h-6 fill-current"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                d="M22.46 6c-.77.34-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.6 8.6 0 01-2.72 1.04 4.28 4.28 0 00-7.3 3.9 12.17 12.17 0 01-8.83-4.48 4.27 4.27 0 001.33 5.71 4.24 4.24 0 01-1.94-.54v.05a4.28 4.28 0 003.44 4.2 4.29 4.29 0 01-1.93.07 4.28 4.28 0 003.99 2.97A8.6 8.6 0 012 19.54a12.15 12.15 0 006.57 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.18 0-.35-.01-.53A8.66 8.66 0 0022.46 6z"
+                        />
+                    </svg>
+                </a>
+                <a
+                        href="#"
+                        aria-label="Instagram"
+                        class="hover:text-pink-500 transition focus:outline-none focus:ring-2 focus:ring-pink-400 rounded"
+                >
+                    <svg
+                            class="w-6 h-6 fill-current"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5a4.25 4.25 0 00-4.25 4.25v8.5a4.25 4.25 0 004.25 4.25h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-2.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"
+                        />
+                    </svg>
+                </a>
+                <a
+                        href="#"
+                        aria-label="LinkedIn"
+                        class="hover:text-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                >
+                    <svg
+                            class="w-6 h-6 fill-current"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.93v5.68h-3.55V9h3.41v1.56h.05a3.74 3.74 0 013.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.3zM5.34 7.43a2.06 2.06 0 11.01-4.12 2.06 2.06 0 01-.01 4.12zM6.7 20.45H3.97V9h2.73v11.45z"
+                        />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div
+            class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-500 text-sm"
+    >
+        &copy; 2025 QuickNotes. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

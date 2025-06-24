@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+    <meta charset="UTF-8" />
+    <title>Notes - QuickNotes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/images/logo.png" type="image/png" />
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
+
+<!-- NAVBAR -->
+<header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        role="banner"
+>
+    <div
+            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+    >
+        <!-- Brand -->
+        <a
+                href="/"
+                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >QuickNotes</a
+        >
+
+        <!-- Hamburger Button -->
+        <button
+                id="menu-toggle"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                aria-label="Toggle menu"
+        >
+            <svg
+                    class="w-7 h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+            </svg>
+        </button>
+
+        <!-- Desktop Nav -->
+        <nav
+                class="hidden md:flex items-center gap-8 text-lg font-medium"
+                role="navigation"
+                aria-label="Primary Navigation"
+        >
+            <a
+                    href="/"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Home</a
+            >
+            <a
+                    th:href="@{/about}"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >About</a
+            >
+            <a
+                    href="/notes"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Notes</a
+            >
+            <a
+                    href="/questions"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Questions</a
+            >
+
+        </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav
+            id="mobile-menu"
+            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            role="navigation"
+            aria-label="Mobile Navigation"
+    >
+        <a
+                href="/"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Home</a
+        >
+        <a
+                th:href="@{/about}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >About</a
+        >
+        <a
+                th:href="@{/notes}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Notes</a
+        >
+        <a
+                th:href="@{/questions}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Questions</a
+        >
+    </nav>
+</header>
+
+<!-- Minimal JS for mobile toggle -->
+<script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggleButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        toggleButton.setAttribute('aria-expanded', String(!isHidden));
+    });
+</script>
+
+
+<!-- MAIN CONTENT -->
+<main class="flex-grow max-w-7xl mx-auto p-8 sm:p-12">
+    <h1 class="text-4xl font-extrabold text-blue-400 mb-8 text-center">Grade 12 Computer Science Notes</h1>
+
+    <!-- NOTE LIST -->
+    <div th:if="${notes != null and !notes.isEmpty()}" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
+        <!-- Changed lg:grid-cols-3 to lg:grid-cols-2 to make cards wider on large screens -->
+        <div th:each="note : ${notes}" class="bg-gray-800 rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition cursor-pointer">
+            <!-- Increased padding from p-6 to p-8, heavier shadow -->
+            <h2 th:text="${note.title}" class="text-2xl font-bold text-blue-400 mb-4">
+                <!-- Increased font size from text-xl to text-2xl -->
+                Note Title
+            </h2>
+            <p th:text="${note.description}" class="text-gray-300 mb-6 line-clamp-4 text-lg">
+                <!-- Increased bottom margin and font size, allowed 4 lines instead of 3 -->
+                Note description preview...
+            </p>
+            <a th:href="@{/notes/{id}(id=${note.id})}"
+               class="inline-block bg-primary hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-md focus:outline-none focus:ring-4 focus:ring-blue-400 transition">
+                <!-- Increased padding and focus ring size -->
+                View
+            </a>
+        </div>
+    </div>
+
+
+    <!-- NO NOTES YET -->
+    <p th:if="${notes == null or notes.isEmpty()}" class="text-gray-400 text-center mt-16 text-lg">
+        No notes available yet. Please check back later.
+    </p>
+</main>
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 p-10 mt-16">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+        <div>
+            <h3 class="text-blue-400 font-bold text-xl mb-4">QuickNotes</h3>
+            <p>
+                Empowering Nepali students with digital study tools.
+            </p>
+            <p class="mt-2 text-sm">&copy; 2025 QuickNotes. All rights reserved.</p>
+        </div>
+
+        <div>
+            <h4 class="text-blue-400 font-semibold mb-3">Contact</h4>
+            <p>Email: support@quicknotes.com</p>
+            <p>Phone: +977 9800000000</p>
+        </div>
+
+        <div>
+            <h4 class="text-blue-400 font-semibold mb-3">Follow Us</h4>
+            <div class="flex space-x-4 text-xl">
+                <a href="#" aria-label="Facebook" class="hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">📘</a>
+                <a href="#" aria-label="Twitter" class="hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">🐦</a>
+                <a href="#" aria-label="Instagram" class="hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded">📸</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    btn?.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>
+</body>
+</html>

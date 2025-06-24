@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+    <meta charset="UTF-8" />
+    <title>About - QuickNotes</title>
+    <link rel="icon" href="/images/logo.png" type="image/png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
+
+<!-- NAVBAR -->
+<header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        role="banner"
+>
+    <div
+            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+    >
+        <!-- Brand -->
+        <a
+                href="/"
+                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >QuickNotes</a
+        >
+
+        <!-- Hamburger Button -->
+        <button
+                id="menu-toggle"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                aria-label="Toggle menu"
+        >
+            <svg
+                    class="w-7 h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+            </svg>
+        </button>
+
+        <!-- Desktop Nav -->
+        <nav
+                class="hidden md:flex items-center gap-8 text-lg font-medium"
+                role="navigation"
+                aria-label="Primary Navigation"
+        >
+            <a
+                    th:href="@{/}"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Home</a
+            >
+            <a
+                    th:href="@{/about}"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >About</a
+            >
+            <a
+                    th:href="@{/notes}"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Notes</a
+            >
+            <a
+                    th:href="@{/questions}"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
+            >Questions</a
+            >
+        </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <nav
+            id="mobile-menu"
+            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            role="navigation"
+            aria-label="Mobile Navigation"
+    >
+        <a
+                th:href="@{/}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Home</a
+        >
+        <a
+                th:href="@{/about}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >About</a
+        >
+        <a
+                th:href="@{/notes}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Notes</a
+        >
+        <a
+                th:href="@{/questions}"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
+        >Questions</a
+        >
+
+    </nav>
+</header>
+
+<!-- Minimal JS for mobile toggle -->
+<script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    toggleButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        toggleButton.setAttribute('aria-expanded', String(!isHidden));
+    });
+</script>
+
+<!-- MAIN ABOUT CONTENT -->
+<main class="flex-grow max-w-6xl mx-auto p-8 sm:p-12 space-y-20">
+    <h1 class="text-5xl font-extrabold text-blue-400 mb-12 text-center">About QuickNotes</h1>
+
+    <section class="flex flex-col md:flex-row items-center gap-12">
+        <div class="md:w-1/2 space-y-6">
+            <p class="text-gray-300 text-lg leading-relaxed">
+                QuickNotes is a dedicated platform developed by two ambitious young
+                developers, <strong>Prasun Tripathi</strong> and <strong>Prabhas Budathoki</strong>,
+                who are passionate about digitalizing and simplifying the learning
+                experience for Grade 12 NEB Computer Science students across Nepal.
+            </p>
+            <p class="text-gray-400 text-base leading-relaxed">
+                Our mission is to provide students with organized, high-quality notes and question
+                sets that are easy to access and use, making studying efficient and effective.
+            </p>
+            <p class="text-gray-400 text-base leading-relaxed">
+                By leveraging modern web technologies and user-centric design, we strive to
+                empower Nepali students to excel academically and prepare confidently for their exams.
+            </p>
+        </div>
+        <div class="md:w-1/2">
+            <img
+                    src="/images/hero.png"
+                    alt="Students studying with laptops"
+                    class="rounded-3xl shadow-lg w-full max-w-lg mx-auto"
+            />
+        </div>
+    </section>
+
+    <section class="bg-gray-800 rounded-3xl p-10 shadow-lg space-y-10 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-blue-400 mb-8 text-center">Our Story</h2>
+        <p class="text-gray-300 text-lg leading-relaxed">
+            Founded by <strong>Prasun Tripathi</strong> (17) and <strong>Prabhas Budathoki</strong> (16), QuickNotes
+            was born out of their shared vision to make computer science notes and question
+            sets more accessible for their fellow Nepali students. With fresh ideas and relentless
+            dedication, these two young developers have crafted a platform that brings
+            educational resources into the digital age — simple, reliable, and user-friendly.
+        </p>
+
+        <!-- About Developers Section -->
+        <div>
+            <h3 class="text-2xl font-semibold text-blue-400 mb-6 text-center">Meet the Developers</h3>
+            <div class="flex flex-col md:flex-row gap-10 justify-center">
+                <!-- Prasun -->
+                <div class="bg-gray-700 rounded-2xl p-6 shadow-lg flex flex-col items-center max-w-xs mx-auto">
+                    <img
+                            src="https://i.pravatar.cc/150?u=prasun"
+                            alt="Prasun Tripathi"
+                            class="rounded-full w-32 h-32 mb-4 shadow-md"
+                    />
+                    <h4 class="text-xl font-bold text-blue-300 mb-1">Prasun Tripathi</h4>
+                    <p class="text-gray-300 mb-2 text-center">
+                        17 years old full stack developer<br />
+                        Studying at <strong>St. Xavier's College, Maitighar</strong>
+                    </p>
+                    <p class="text-gray-400 text-sm text-center">
+                        Passionate about creating seamless backend and frontend integrations, Prasun is committed to
+                        digitalizing education in Nepal through innovative and user-friendly software solutions.
+                    </p>
+                </div>
+
+                <!-- Prabhas -->
+                <div class="bg-gray-700 rounded-2xl p-6 shadow-lg flex flex-col items-center max-w-xs mx-auto">
+                    <img
+                            src="https://i.pravatar.cc/150?u=prabhas"
+                            alt="Prabhas Budathoki"
+                            class="rounded-full w-32 h-32 mb-4 shadow-md"
+                    />
+                    <h4 class="text-xl font-bold text-blue-300 mb-1">Prabhas Budathoki</h4>
+                    <p class="text-gray-300 mb-2 text-center">
+                        16 years old designer and developer<br />
+                        Studying at <strong>St. Xavier's College, Maitighar</strong>
+                    </p>
+                    <p class="text-gray-400 text-sm text-center">
+                        Focused on intuitive and beautiful design, Prabhas brings creativity and user experience expertise
+                        to QuickNotes, ensuring that learning is both efficient and enjoyable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-gray-400 p-10 mt-16">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+        <div>
+            <h3 class="text-blue-400 font-bold text-xl mb-4">QuickNotes</h3>
+            <p>
+                Empowering Nepali students with digital study tools.
+            </p>
+            <p class="mt-2 text-sm">&copy; 2025 QuickNotes. All rights reserved.</p>
+        </div>
+
+        <div>
+            <h4 class="text-blue-400 font-semibold mb-3">Contact</h4>
+            <p>Email: support@quicknotes.com</p>
+            <p>Phone: +977 9800000000</p>
+        </div>
+
+        <div>
+            <h4 class="text-blue-400 font-semibold mb-3">Follow Us</h4>
+            <div class="flex space-x-4 text-xl">
+                <a href="#" aria-label="Facebook" class="hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">📘</a>
+                <a href="#" aria-label="Twitter" class="hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">🐦</a>
+                <a href="#" aria-label="Instagram" class="hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded">📸</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    btn?.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+</script>
+</body>
+</html>
