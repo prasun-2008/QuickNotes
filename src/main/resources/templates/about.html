@@ -2,292 +2,313 @@
 <html lang="en" class="scroll-smooth" >
 <head>
     <meta charset="UTF-8" />
-    <title>About - QuickNotes</title>
+    <title>About - NEB Notes | Founded by Prasun Tripathi</title>
     <link rel="icon" href="/images/logo.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- SEO Metadata -->
-    <meta name="description" content="Discover QuickNotes, founded by Prasun Tripathi, the ultimate platform for Grade 12 NEB Computer Science Notes and Questions. Revolutionizing education in Nepal." />
+
+    <!-- Primary SEO Metadata -->
+    <meta name="description" content="Learn about NEB Notes, founded by Prasun Tripathi, a 16-year-old visionary and full-stack developer. Explore how NEB Notes is revolutionizing education with Class 11 and 12 resources for Physics, Chemistry, and Computer Science." />
     <meta name="author" content="Prasun Tripathi" />
-    <meta name="keywords" content="QuickNotes, Prasun Tripathi, QuickNotes Founder, Grade 12 NEB Notes, NEB Computer Science, Education Nepal, Digital Learning, Prasun QuickNotes" />
+    <meta name="keywords" content="About NEB Notes, Prasun Tripathi, NEB Notes Founder, Class 11 Notes Nepal, Class 12 Notes Nepal, Physics Notes, Chemistry Notes, Computer Science Notes, Educational Resources Nepal, Full-Stack Developer" />
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="About QuickNotes - Founded by Prasun Tripathi" />
-    <meta property="og:description" content="Learn about QuickNotes, a revolutionary platform for Grade 12 NEB Computer Science, created by Prasun Tripathi." />
+    <meta property="og:title" content="About NEB Notes | Founded by Prasun Tripathi" />
+    <meta property="og:description" content="Discover NEB Notes, founded by Prasun Tripathi, offering high-quality educational resources for NEB students in Class 11 and 12. Visit https://nebnotes.onrender.com for detailed notes and solutions." />
     <meta property="og:image" content="/images/logo.png" />
-    <meta property="og:url" content="https://quicknotes-03br.onrender.com/about" />
-    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nebnotes.onrender.com/about" />
 
-    <!-- Twitter Card Metadata -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="About QuickNotes - Founded by Prasun Tripathi" />
-    <meta name="twitter:description" content="Explore QuickNotes, the brainchild of Prasun Tripathi, simplifying education for Grade 12 NEB students in Nepal." />
+    <!-- Twitter Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About NEB Notes | Founded by Prasun Tripathi" />
+    <meta name="twitter:description" content="Learn about NEB Notes, a platform founded by Prasun Tripathi to provide Class 11 and 12 educational resources. Visit https://nebnotes.onrender.com." />
     <meta name="twitter:image" content="/images/logo.png" />
 
-    <!-- Canonical Link -->
-    <link rel="canonical" href="https://quicknotes-03br.onrender.com/about" />
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="3CUFP0JH-HlSenVr54oluqBMhJRnJXaiWpR3Y_yrIVI" />
 
-    <!-- Additional SEO Tags -->
+    <!-- Additional SEO Enhancements -->
+    <link rel="canonical" href="https://nebnotes.onrender.com/about" />
     <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="bingbot" content="index, follow" />
-    <meta name="rating" content="General" />
-    <meta name="distribution" content="Global" />
-    <meta name="revisit-after" content="7 days" />
-    <meta name="language" content="en" />
-    <meta name="subject" content="About QuickNotes and Prasun Tripathi" />
-    <meta name="classification" content="Education, Notes, NEB, QuickNotes, Prasun Tripathi" />
-    <meta name="theme-color" content="#2563eb" />
 
-    <!-- Link Metadata -->
-    <link rel="icon" href="/images/logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/images/logo.png" />
-    <link rel="alternate" hreflang="en" href="https://quicknotes-03br.onrender.com/about" />
+    <!-- Tailwind CSS CDN + Typography Plugin -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'media',
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         primary: '#2563eb',
                     },
+                    keyframes: {
+                        fadeSlideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    },
+                    animation: {
+                        fadeSlideUp: 'fadeSlideUp 0.7s ease forwards',
+                    },
                 },
             },
+            plugins: [function({ addUtilities }) {
+                addUtilities({
+                    '.backdrop-blur-xl': {
+                        'backdrop-filter': 'blur(20px)'
+                    }
+                })
+            }]
         }
     </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
+
+<body class="dark bg-gray-900 text-gray-100 font-sans selection:bg-primary selection:text-white">
 
 <!-- NAVBAR -->
-<header
-        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
-        role="banner"
->
-    <div
-            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
-    >
-        <!-- Brand -->
-        <a
-                href="/"
-                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >QuickNotes</a
-        >
+<header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-xl shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="text-3xl font-extrabold text-primary tracking-tight hover:tracking-widest transition-all duration-300 select-none">
+            NEB Notes
+        </a>
+        <nav class="hidden md:flex space-x-12 font-semibold text-lg tracking-wide">
+            <a href="/" class="hover:text-primary transition">Home</a>
+            <a href="/about" class="text-primary underline decoration-primary decoration-2 font-bold">About</a>
+            <a href="/notes" class="hover:text-primary transition">Notes</a>
+            <a href="/questions" class="hover:text-primary transition">Questions</a>
+        </nav>
 
-        <!-- Hamburger Button -->
-        <button
-                id="menu-toggle"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-                aria-label="Toggle menu"
-        >
-            <svg
-                    class="w-7 h-7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-            >
-                <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4 6h16M4 12h16M4 18h16"
-                ></path>
+        <!-- Mobile hamburger -->
+        <button id="menu-toggle" aria-label="Open mobile menu" aria-expanded="false" class="md:hidden p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+            <svg class="w-8 h-8 text-gray-100" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
         </button>
-
-        <!-- Desktop Nav -->
-        <nav
-                class="hidden md:flex items-center gap-8 text-lg font-medium"
-                role="navigation"
-                aria-label="Primary Navigation"
-        >
-            <a
-                    th:href="@{/}"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            >Home</a
-            >
-            <a
-                    th:href="@{/about}"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            >About</a
-            >
-            <a
-                    th:href="@{/notes}"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            >Notes</a
-            >
-            <a
-                    th:href="@{/questions}"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
-            >Questions</a
-            >
-        </nav>
     </div>
 
-    <!-- Mobile Menu -->
-    <nav
-            id="mobile-menu"
-            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
-            role="navigation"
-            aria-label="Mobile Navigation"
-    >
-        <a
-                th:href="@{/}"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >Home</a
-        >
-        <a
-                th:href="@{/about}"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >About</a
-        >
-        <a
-                th:href="@{/notes}"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >Notes</a
-        >
-        <a
-                th:href="@{/questions}"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
-        >Questions</a
-        >
+    <!-- Mobile drawer menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+        <!-- Backdrop -->
+        <div id="mobile-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-xl transition-opacity"></div>
 
-    </nav>
+        <!-- Drawer panel -->
+        <nav class="absolute top-0 right-0 w-64 h-full bg-gray-900 shadow-2xl p-8 space-y-8 flex flex-col">
+            <button id="menu-close" aria-label="Close mobile menu" class="self-end p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+                <svg class="w-8 h-8 text-gray-100" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="/" class="text-xl font-semibold hover:text-primary transition">Home</a>
+            <a href="/about" class="text-xl font-semibold text-primary underline decoration-primary decoration-2">About</a>
+            <a href="/notes" class="text-xl font-semibold hover:text-primary transition">Notes</a>
+            <a href="/questions" class="text-xl font-semibold hover:text-primary transition">Questions</a>
+        </nav>
+    </div>
 </header>
 
-<!-- Minimal JS for mobile toggle -->
-<script>
-    const toggleButton = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+<!-- MAIN -->
+<main class="max-w-7xl mx-auto px-6 pt-28 pb-20 space-y-40">
 
-    toggleButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        toggleButton.setAttribute('aria-expanded', String(!isHidden));
-    });
-</script>
+    <!-- Hero Section -->
+    <section class="max-w-4xl mx-auto text-center space-y-6 animate-fadeSlideUp" style="animation-delay: 0.2s;">
+        <h1 class="text-6xl font-extrabold text-primary leading-tight select-none drop-shadow-lg">About NEB Notes</h1>
+        <p class="text-xl text-gray-300 font-semibold max-w-3xl mx-auto leading-relaxed tracking-wide">
+            Built by passionate student developers <span class="text-primary underline decoration-primary decoration-2 font-bold">Prasun Tripathi</span> &amp; <span class="text-primary underline decoration-primary decoration-2 font-bold">Prabhas Budathoki</span>, QuickNotes simplifies learning for Class 12 NEB students across Nepal.
+        </p>
+    </section>
 
-<!-- MAIN ABOUT CONTENT -->
-<main class="flex-grow max-w-6xl mx-auto p-8 sm:p-12 space-y-20">
-    <h1 class="text-5xl font-extrabold text-blue-400 mb-12 text-center">About QuickNotes</h1>
-
-    <section class="flex flex-col md:flex-row items-center gap-12">
-        <div class="md:w-1/2 space-y-6">
-            <p class="text-gray-300 text-lg leading-relaxed">
-                QuickNotes is a dedicated platform developed by two ambitious young
-                developers, <strong>Prasun Tripathi</strong> and <strong>Prabhas Budathoki</strong>,
-                who are passionate about digitalizing and simplifying the learning
-                experience for Grade 12 NEB Computer Science students across Nepal.
+    <!-- Mission + Image -->
+    <section class="grid md:grid-cols-2 gap-20 items-center max-w-5xl mx-auto animate-fadeSlideUp" style="animation-delay: 0.4s;">
+        <div class="space-y-8 text-gray-300">
+            <p class="text-lg font-medium leading-relaxed">
+                Our mission is to provide <span class="text-primary font-bold">organized</span>, <span class="text-primary font-bold">syllabus-based</span>, and <span class="text-primary font-bold">easy-to-understand</span> notes and model questions.
             </p>
-            <p class="text-gray-400 text-base leading-relaxed">
-                Our mission is to provide students with organized, high-quality notes and question
-                sets that are easy to access and use, making studying efficient and effective.
+            <p class="tracking-wide">
+                From beautiful design to practical functionality, every feature is crafted with NEB students in mind to help them study better, faster, and with more confidence.
             </p>
-            <p class="text-gray-400 text-base leading-relaxed">
-                By leveraging modern web technologies and user-centric design, we strive to
-                empower Nepali students to excel academically and prepare confidently for their exams.
-            </p>
+            <a href="/notes" class="inline-block mt-6 px-10 py-3 bg-gradient-to-r from-primary to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:from-blue-700 hover:to-primary transition">
+                Explore Notes & Questions
+            </a>
         </div>
-        <div class="md:w-1/2">
-            <img
-                    src="/images/hero.png"
-                    alt="Students studying with laptops"
-                    class="rounded-3xl shadow-lg w-full max-w-lg mx-auto"
-            />
+        <div class="relative">
+            <img src="/images/hero.png" alt="Students learning" loading="lazy" class="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 ease-in-out" />
+            <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary rounded-full opacity-30 blur-3xl mix-blend-multiply pointer-events-none"></div>
         </div>
     </section>
 
-    <section class="bg-gray-800 rounded-3xl p-10 shadow-lg space-y-10 max-w-4xl mx-auto">
-        <h2 class="text-3xl font-bold text-blue-400 mb-8 text-center">Our Story</h2>
-        <p class="text-gray-300 text-lg leading-relaxed">
-            Founded by <strong>Prasun Tripathi</strong> (17) and <strong>Prabhas Budathoki</strong> (16), QuickNotes
-            was born out of their shared vision to make computer science notes and question
-            sets more accessible for their fellow Nepali students. With fresh ideas and relentless
-            dedication, these two young developers have crafted a platform that brings
-            educational resources into the digital age — simple, reliable, and user-friendly.
-        </p>
-
-        <!-- About Developers Section -->
-        <div>
-            <h3 class="text-2xl font-semibold text-blue-400 mb-6 text-center">Meet the Developers</h3>
-            <div class="flex flex-col md:flex-row gap-10 justify-center">
-                <!-- Prasun -->
-                <div class="bg-gray-700 rounded-2xl p-6 shadow-lg flex flex-col items-center max-w-xs mx-auto">
-                    <img
-                            src="https://i.pravatar.cc/150?u=prasun"
-                            alt="Prasun Tripathi"
-                            class="rounded-full w-32 h-32 mb-4 shadow-md"
-                    />
-                    <h4 class="text-xl font-bold text-blue-300 mb-1">Prasun Tripathi</h4>
-                    <p class="text-gray-300 mb-2 text-center">
-                        17 years old full stack developer<br />
-                        Studying at <strong>St. Xavier's College, Maitighar</strong>
-                    </p>
-                    <p class="text-gray-400 text-sm text-center">
-                        Passionate about creating seamless backend and frontend integrations, Prasun is committed to
-                        digitalizing education in Nepal through innovative and user-friendly software solutions.
-                    </p>
-                </div>
-
-                <!-- Prabhas -->
-                <div class="bg-gray-700 rounded-2xl p-6 shadow-lg flex flex-col items-center max-w-xs mx-auto">
-                    <img
-                            src="https://i.pravatar.cc/150?u=prabhas"
-                            alt="Prabhas Budathoki"
-                            class="rounded-full w-32 h-32 mb-4 shadow-md"
-                    />
-                    <h4 class="text-xl font-bold text-blue-300 mb-1">Prabhas Budathoki</h4>
-                    <p class="text-gray-300 mb-2 text-center">
-                        16 years old designer and developer<br />
-                        Studying at <strong>St. Xavier's College, Maitighar</strong>
-                    </p>
-                    <p class="text-gray-400 text-sm text-center">
-                        Focused on intuitive and beautiful design, Prabhas brings creativity and user experience expertise
-                        to QuickNotes, ensuring that learning is both efficient and enjoyable.
-                    </p>
-                </div>
+    <!-- Developers Cards -->
+    <section class="bg-gray-800 rounded-3xl p-12 max-w-6xl mx-auto shadow-xl animate-fadeSlideUp" style="animation-delay: 0.6s;">
+        <h2 class="text-4xl font-extrabold text-primary text-center mb-14 select-none drop-shadow-lg">Meet the Developers</h2>
+        <div class="flex flex-col md:flex-row justify-center gap-12">
+            <div
+                    class="bg-gray-900 rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer"
+                    tabindex="0"
+            >
+                <img src="https://i.pravatar.cc/150?u=prasun" alt="Prasun Tripathi" loading="lazy" class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg" />
+                <h3 class="text-2xl font-semibold mb-1 text-gray-100">Prasun Tripathi</h3>
+                <p class="text-primary font-semibold mb-3">Full-stack Developer • Age 17</p>
+                <p class="text-gray-300 leading-relaxed tracking-wide">
+                    Backend-focused, passionate about seamless development and building student-centered tools.
+                </p>
+            </div>
+            <div
+                    class="bg-gray-900 rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer"
+                    tabindex="0"
+            >
+                <img src="https://i.pravatar.cc/150?u=prabhas" alt="Prabhas Budathoki" loading="lazy" class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg" />
+                <h3 class="text-2xl font-semibold mb-1 text-gray-100">Prabhas Budathoki</h3>
+                <p class="text-primary font-semibold mb-3">UI Designer & Developer • Age 16</p>
+                <p class="text-gray-300 leading-relaxed tracking-wide">
+                    Loves clean UI, mobile-first design, and turning code into visually engaging experiences.
+                </p>
             </div>
         </div>
     </section>
+
+    <!-- Testimonials -->
+    <section class="max-w-7xl mx-auto py-20 px-6">
+        <h2 class="text-4xl font-extrabold text-primary text-center mb-16 select-none drop-shadow-md">What Users Say</h2>
+        <div class="grid gap-10 md:grid-cols-3">
+            <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
+                <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
+                    "NEB Notes helped me so much during exam prep! The notes are simple and to the point."
+                </p>
+                <footer class="text-primary font-semibold text-lg">— Rojit Khadka</footer>
+            </blockquote>
+            <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
+                <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
+                    "I never thought studying Computer Science could be this easy. Thank you QuickNotes!"
+                </p>
+                <footer class="text-primary font-semibold text-lg">— Puspa Kamal Gautam</footer>
+            </blockquote>
+            <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
+                <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
+                    "Everything I needed for Class 12 was here. Highly recommend to all NEB students."
+                </p>
+                <footer class="text-primary font-semibold text-lg">— Riwaz Nepal</footer>
+            </blockquote>
+        </div>
+    </section>
+
+
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-gray-900 text-gray-400 p-10 mt-16">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+<footer class="bg-gray-900 text-gray-400 py-12 mt-20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between px-8 gap-16">
         <div>
-            <h3 class="text-blue-400 font-bold text-xl mb-4">QuickNotes</h3>
-            <p>
-                Empowering Nepali students with digital study tools.
+            <h3 class="text-blue-400 font-extrabold text-2xl mb-3 select-none">QuickNotes</h3>
+            <p class="max-w-xs font-light leading-relaxed tracking-wide">
+                Empowering Nepali students with digital tools to unlock their potential.
             </p>
-            <p class="mt-2 text-sm">&copy; 2025 QuickNotes. All rights reserved.</p>
+            <p class="mt-6 text-sm opacity-70">&copy; 2025 QuickNotes. All rights reserved.</p>
         </div>
-
         <div>
             <h4 class="text-blue-400 font-semibold mb-3">Contact</h4>
-            <p>Email: support@quicknotes.com</p>
-            <p>Phone: +977 9800000000</p>
+            <p class="font-light">Email: <a href="mailto:quicknotes2008@gmail.com" class="hover:text-primary transition">support@quicknotes.com</a></p>
+            <p class="font-light">Phone: <a href="tel:+9779800000000" class="hover:text-primary transition">+977 9800000000</a></p>
         </div>
-
         <div>
             <h4 class="text-blue-400 font-semibold mb-3">Follow Us</h4>
-            <div class="flex space-x-4 text-xl">
-                <a href="#" aria-label="Facebook" class="hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">📘</a>
-                <a href="#" aria-label="Twitter" class="hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">🐦</a>
-                <a href="#" aria-label="Instagram" class="hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded">📸</a>
+            <div class="flex space-x-6 text-3xl">
+                <a href="#" aria-label="Facebook" class="text-blue-600 hover:text-blue-700 transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
+                        <path d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.325v21.351c0 .733.592 1.324 1.325 1.324h11.495v-9.294h-3.124v-3.622h3.124v-2.671c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.311h3.588l-.467 3.622h-3.121V24h6.116c.732 0 1.324-.591 1.324-1.324V1.325c0-.733-.592-1.325-1.325-1.325z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter" class="text-sky-400 hover:text-sky-500 transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
+                        <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.95.562-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.723 0-4.928 2.205-4.928 4.928 0 .39.045.765.127 1.124-4.09-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.574-.666 2.476 0 1.71.87 3.214 2.188 4.096-.807-.026-1.566-.247-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.031-.927-.088.627 1.956 2.444 3.379 4.6 3.42-1.68 1.318-3.808 2.104-6.115 2.104-.397 0-.789-.023-1.175-.069 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14.001-7.496 14.001-13.986 0-.21 0-.423-.015-.634.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram" class="text-pink-600 hover:text-pink-700 transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
+                        <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.88a1.12 1.12 0 11-2.24 0 1.12 1.12 0 012.24 0z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
 </footer>
 
+<!-- Scripts -->
 <script>
     // Mobile menu toggle
-    const btn = document.getElementById('mobile-menu-button');
-    const menu = document.getElementById('mobile-menu');
-    btn?.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileBackdrop = document.getElementById('mobile-backdrop');
+
+    function openMenu() {
+        mobileMenu.classList.remove('hidden');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        // Animate slide-in
+        mobileMenu.querySelector('nav').classList.remove('translate-x-full');
+        mobileMenu.querySelector('nav').classList.add('translate-x-0');
+    }
+    function closeMenu() {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        // Animate slide-out
+        const nav = mobileMenu.querySelector('nav');
+        nav.classList.add('translate-x-full');
+        nav.classList.remove('translate-x-0');
+        setTimeout(() => {
+            mobileMenu.classList.add('hidden');
+        }, 300);
+    }
+
+    menuToggle.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('hidden')) {
+            openMenu();
+        } else {
+            closeMenu();
+        }
     });
+    menuClose.addEventListener('click', closeMenu);
+    mobileBackdrop.addEventListener('click', closeMenu);
+
+    // Initial nav position for mobile
+    mobileMenu.querySelector('nav').classList.add('translate-x-full', 'transition-transform', 'duration-300', 'ease-in-out');
+
+    // Testimonial carousel logic
+    const testimonials = document.querySelectorAll('.testimonial-item');
+    let currentIndex = 0;
+    const total = testimonials.length;
+
+    function showTestimonial(index) {
+        testimonials.forEach((el, i) => {
+            if(i === index) {
+                el.style.opacity = '1';
+                el.style.position = 'relative';
+                el.style.pointerEvents = 'auto';
+            } else {
+                el.style.opacity = '0';
+                el.style.position = 'absolute';
+                el.style.pointerEvents = 'none';
+            }
+        });
+    }
+
+    document.getElementById('prev-testimonial').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + total) % total;
+        showTestimonial(currentIndex);
+    });
+
+    document.getElementById('next-testimonial').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % total;
+        showTestimonial(currentIndex);
+    });
+
+    // Auto rotate every 7 seconds
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % total;
+        showTestimonial(currentIndex);
+    }, 7000);
+
+    // Show first testimonial on load
+    showTestimonial(0);
 </script>
+
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/images/logo.png" type="image/png" />
+
     <!-- General Metadata -->
-    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Grade 12 NEB Questions - Designed by SXC's Best | QuickNotes</title>
     <meta name="description" content="Discover comprehensive Grade 12 NEB Computer Science question sets, crafted by Nepal's top students at St. Xavier's College (SXC). Prepare confidently with QuickNotes." />
@@ -29,22 +29,12 @@
 
     <!-- Additional SEO Tags -->
     <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="bingbot" content="index, follow" />
-    <meta name="rating" content="General" />
-    <meta name="distribution" content="Global" />
-    <meta name="revisit-after" content="7 days" />
-    <meta name="language" content="en" />
-    <meta name="subject" content="NEB Grade 12 Questions by SXC's Best Students | QuickNotes" />
-    <meta name="classification" content="Education, Questions, NEB, Grade 12, QuickNotes, St. Xavier's College, Prasun Tripathi" />
     <meta name="theme-color" content="#2563eb" />
 
-    <!-- Link Metadata -->
-    <link rel="icon" href="/images/logo.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/images/logo.png" />
-    <link rel="alternate" hreflang="en" href="https://quicknotes-03br.onrender.com/questions" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -53,17 +43,36 @@
                 extend: {
                     colors: {
                         primary: '#2563eb',
+                        primaryDark: '#1d4ed8',
+                        accent: '#ef4444',
                     },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card-light': '0 10px 15px -3px rgba(37, 99, 235, 0.3), 0 4px 6px -2px rgba(37, 99, 235, 0.1)',
+                        'card-dark': '0 10px 20px rgba(59, 130, 246, 0.5)',
+                    }
                 },
             },
         }
     </script>
+
+    <style>
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
 </head>
+
 <body class="bg-gray-900 text-gray-100 font-sans flex flex-col min-h-screen">
 
 <!-- NAVBAR -->
 <header
-        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur shadow-md"
         role="banner"
 >
     <div
@@ -72,9 +81,8 @@
         <!-- Brand -->
         <a
                 href="/"
-                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >QuickNotes</a
-        >
+                class="text-3xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >QuickNotes</a>
 
         <!-- Hamburger Button -->
         <button
@@ -103,60 +111,51 @@
 
         <!-- Desktop Nav -->
         <nav
-                class="hidden md:flex items-center gap-8 text-lg font-medium"
+                class="hidden md:flex items-center gap-10 text-lg font-semibold"
                 role="navigation"
                 aria-label="Primary Navigation"
         >
             <a
                     href="/"
                     class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            >Home</a
-            >
+            >Home</a>
             <a
                     href="/about"
                     class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            >About</a
-            >
+            >About</a>
             <a
                     href="/notes"
                     class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            >Notes</a
-            >
-
+            >Notes</a>
         </nav>
     </div>
 
     <!-- Mobile Menu -->
     <nav
             id="mobile-menu"
-            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            class="md:hidden hidden flex-col gap-3 px-6 pb-6 text-lg font-semibold bg-white/90 dark:bg-gray-900/90 backdrop-blur shadow-inner"
             role="navigation"
             aria-label="Mobile Navigation"
     >
         <a
                 href="/"
                 class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >Home</a
-        >
+        >Home</a>
         <a
                 href="/about"
                 class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >About</a
-        >
+        >About</a>
         <a
                 href="/notes"
                 class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-        >Notes</a
-        >
-
+        >Notes</a>
     </nav>
 </header>
 
-<!-- Minimal JS for mobile toggle -->
+<!-- MOBILE MENU TOGGLE SCRIPT -->
 <script>
     const toggleButton = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-
     toggleButton.addEventListener('click', () => {
         const isHidden = mobileMenu.classList.toggle('hidden');
         toggleButton.setAttribute('aria-expanded', String(!isHidden));
@@ -164,74 +163,106 @@
 </script>
 
 <!-- MAIN CONTENT -->
-<main class="flex-grow max-w-7xl mx-auto p-8 sm:p-12">
-    <h1 class="text-4xl font-extrabold text-blue-400 mb-8 text-center">Grade 12 Computer Science Questions</h1>
-    <h3 class="text-xl text-center text-gray-400 mb-6" th:text="${fullname}"></h3>
+<main class="flex-grow max-w-7xl mx-auto p-6 sm:p-12 space-y-12">
 
+    <h1 class="text-5xl font-extrabold text-center text-primary drop-shadow-lg select-none">
+        Grade 12 Computer Science Questions
+    </h1>
 
-    <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+    <h3 class="text-xl text-center text-gray-400 mb-12" th:text="${fullname}"></h3>
+
+    <!-- Questions Grid -->
+    <section
             th:if="${questions != null and !questions.isEmpty()}"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"
+            aria-label="List of Grade 12 Computer Science question sets"
     >
-        <!-- Iterate over questions -->
-        <div
-                class="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition cursor-pointer"
+        <article
                 th:each="question : ${questions}"
+                class="bg-gray-800 dark:bg-gray-800 rounded-3xl p-8 shadow-card-dark hover:shadow-card-light transition-shadow duration-300 cursor-pointer flex flex-col justify-between"
+                role="article"
+                tabindex="0"
+                aria-labelledby="question-title-${question.id}"
+                aria-describedby="question-desc-${question.id}"
         >
-            <h2 class="text-xl font-bold text-blue-400 mb-3" th:text="${question.title}">Sample Question Set Title</h2>
-            <p class="text-gray-300 mb-4 line-clamp-3" th:text="${question.description}">Brief description of the question set.</p>
+            <header>
+                <h2
+                        id="question-title-${question.id}"
+                        th:text="${question.title}"
+                        class="text-2xl font-semibold text-blue-400 mb-4 truncate"
+                        title="Question set title"
+                >
+                    Sample Question Set Title
+                </h2>
+            </header>
+
+            <p
+                    id="question-desc-${question.id}"
+                    th:text="${question.description}"
+                    class="text-gray-300 text-lg line-clamp-3 mb-8 leading-relaxed"
+            >
+                Brief description of the question set.
+            </p>
+
             <a
                     th:href="@{/questions/{id}(id=${question.id})}"
-                    class="inline-block bg-primary hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    class="self-start bg-primary hover:bg-primaryDark text-white font-semibold py-3 px-7 rounded-xl shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-500 transition"
+                    aria-label="View question set details"
             >
                 View
             </a>
-        </div>
-    </div>
+        </article>
+    </section>
 
+    <!-- No Questions Fallback -->
     <p
-            class="text-gray-400 text-center mt-16 text-lg"
             th:if="${questions == null or questions.isEmpty()}"
+            class="text-gray-400 text-center text-lg select-none"
+            aria-live="polite"
     >
         No question sets available yet. Please check back later.
     </p>
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-gray-900 text-gray-400 p-10 mt-16">
+<footer class="bg-gray-900 text-gray-400 p-10 mt-auto">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12">
         <div>
-            <h3 class="text-blue-400 font-bold text-xl mb-4">QuickNotes</h3>
-            <p>
-                Empowering Nepali students with digital study tools.
+            <h3 class="text-blue-400 font-extrabold text-2xl mb-4 select-none">QuickNotes</h3>
+            <p class="leading-relaxed max-w-xs">
+                Empowering Nepali students with digital study tools to unlock their full potential.
             </p>
-            <p class="mt-2 text-sm">&copy; 2025 QuickNotes. All rights reserved.</p>
+            <p class="mt-4 text-sm opacity-70">&copy; 2025 QuickNotes. All rights reserved.</p>
         </div>
 
-        <div>
+        <address class="not-italic">
             <h4 class="text-blue-400 font-semibold mb-3">Contact</h4>
-            <p>Email: support@quicknotes.com</p>
-            <p>Phone: +977 9800000000</p>
-        </div>
+            <p>Email: <a href="mailto:support@quicknotes.com" class="hover:text-primary transition">support@quicknotes.com</a></p>
+            <p>Phone: <a href="tel:+9779800000000" class="hover:text-primary transition">+977 9800000000</a></p>
+        </address>
 
         <div>
             <h4 class="text-blue-400 font-semibold mb-3">Follow Us</h4>
-            <div class="flex space-x-4 text-xl">
-                <a href="#" aria-label="Facebook" class="hover:text-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded">📘</a>
-                <a href="#" aria-label="Twitter" class="hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">🐦</a>
-                <a href="#" aria-label="Instagram" class="hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded">📸</a>
+            <div class="flex space-x-6 text-3xl">
+                <a href="#" aria-label="Facebook" class="text-blue-600 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-full transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8">
+                        <path d="M22.675 0h-21.35C.592 0 0 .592 0 1.325v21.351C0 23.408.592 24 1.325 24H12v-9.294H8.707v-3.622H12V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.311h3.588l-.467 3.622h-3.121V24h6.116c.732 0 1.324-.592 1.324-1.324V1.325C24 .592 23.408 0 22.675 0z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter" class="text-sky-400 hover:text-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-400 rounded-full transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8">
+                        <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.95.562-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.723 0-4.928 2.205-4.928 4.928 0 .39.045.765.127 1.124-4.09-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.574-.666 2.476 0 1.71.87 3.214 2.188 4.096-.807-.026-1.566-.247-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.031-.927-.088.627 1.956 2.444 3.379 4.6 3.42-1.68 1.318-3.808 2.104-6.115 2.104-.397 0-.789-.023-1.175-.069 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14.002-7.503 14.002-14.002 0-.213 0-.425-.015-.636.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Instagram" class="text-pink-600 hover:text-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-600 rounded-full transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8">
+                        <path d="M7.75 2A5.75 5.75 0 0 0 2 7.75v8.5A5.75 5.75 0 0 0 7.75 22h8.5A5.75 5.75 0 0 0 22 16.25v-8.5A5.75 5.75 0 0 0 16.25 2h-8.5zm0 2h8.5A3.75 3.75 0 0 1 20 7.75v8.5a3.75 3.75 0 0 1-3.75 3.75h-8.5A3.75 3.75 0 0 1 4 16.25v-8.5A3.75 3.75 0 0 1 7.75 4zm4.25 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm4.75-.75a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </div>
 </footer>
 
-<script>
-    // Mobile menu toggle
-    const btn = document.getElementById('mobile-menu-button');
-    const menu = document.getElementById('mobile-menu');
-    btn?.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
-</script>
 </body>
 </html>
