@@ -31,6 +31,22 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Tailwind CSS -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                    },
+                },
+            },
+        }
+    </script>
+
+
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -52,19 +68,7 @@
         }
     </script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'media',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2563eb',
-                    },
-                },
-            },
-        }
-    </script>
+
 </head>
 
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans antialiased">
