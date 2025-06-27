@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth" >
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8" />
     <title>About - NEB Notes | Founded by Prasun Tripathi</title>
     <link rel="icon" href="/images/logo.png" type="image/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Primary SEO Metadata -->
     <meta name="description" content="Learn about NEB Notes, founded by Prasun Tripathi, a 16-year-old visionary and full-stack developer. Explore how NEB Notes is revolutionizing education with Class 11 and 12 resources for Physics, Chemistry, and Computer Science." />
     <meta name="author" content="Prasun Tripathi" />
     <meta name="keywords" content="About NEB Notes, Prasun Tripathi, NEB Notes Founder, Class 11 Notes Nepal, Class 12 Notes Nepal, Physics Notes, Chemistry Notes, Computer Science Notes, Educational Resources Nepal, Full-Stack Developer" />
@@ -60,6 +58,7 @@
             }]
         }
     </script>
+    <!-- Schema.org Markup for EducationalOrganization -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -77,61 +76,144 @@
                     "name": "Prabhas Budathoki",
                     "url": "https://nebnotes.onrender.com/about"
                 }
-            ]
+            ],
+            "description": "NEB Notes provides organized, syllabus-based, and easy-to-understand notes and model questions for Class 11 and 12 NEB students in Nepal.",
+            "logo": "https://nebnotes.onrender.com/images/logo.png"
         }
     </script>
 
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-
 <body class="dark bg-gray-900 text-gray-100 font-sans selection:bg-primary selection:text-white">
 
-<
 <!-- NAVBAR -->
-<header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-xl shadow-lg">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="/" class="text-3xl font-extrabold text-primary tracking-tight hover:tracking-widest transition-all duration-300 select-none">
-            NEB Notes
-        </a>
-        <nav class="hidden md:flex space-x-12 font-semibold text-lg tracking-wide">
-            <a href="/" class="hover:text-primary transition">Home</a>
-            <a href="/about" class="text-primary underline decoration-primary decoration-2 font-bold">About</a>
-            <a href="/notes" class="hover:text-primary transition">Notes</a>
-            <a href="/questions" class="hover:text-primary transition">Questions</a>
-        </nav>
+<header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        role="banner"
+>
+    <div
+            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+    >
+        <!-- Brand -->
+        <a
+                href="/"
+                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >NEB Notes</a
+        >
 
-        <!-- Mobile hamburger -->
-        <button id="menu-toggle" aria-label="Open mobile menu" aria-expanded="false" class="md:hidden p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
-            <svg class="w-8 h-8 text-gray-100" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        <!-- Hamburger Button -->
+        <button
+                id="menu-toggle"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                aria-label="Toggle menu"
+        >
+            <svg
+                    class="w-7 h-7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+            >
+                <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                ></path>
             </svg>
         </button>
-    </div>
 
-    <!-- Mobile drawer menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
-        <!-- Backdrop -->
-        <div id="mobile-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-xl transition-opacity"></div>
+        <!-- Desktop Nav -->
+        <nav
+                class="hidden md:flex items-center gap-8 text-lg font-medium"
+                role="navigation"
+                aria-label="Primary Navigation"
+        >
+            <a
+                    href="/"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Home</a
+            >
+            <a
+                    href="/about"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >About</a
+            >
+            <a
+                    href="/notes"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Notes</a
+            >
+            <a
+                    href="/questions"
+                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+            >Questions</a
+            >
 
-        <!-- Drawer panel -->
-        <nav class="absolute top-0 right-0 w-64 h-full bg-gray-900 shadow-2xl p-8 space-y-8 flex flex-col">
-            <button id="menu-close" aria-label="Close mobile menu" class="self-end p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
-                <svg class="w-8 h-8 text-gray-100" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <a href="/" class="text-xl font-semibold hover:text-primary transition">Home</a>
-            <a href="/about" class="text-xl font-semibold text-primary underline decoration-primary decoration-2">About</a>
-            <a href="/notes" class="text-xl font-semibold hover:text-primary transition">Notes</a>
-            <a href="/questions" class="text-xl font-semibold hover:text-primary transition">Questions</a>
+            <a
+                    href="register"
+                    class="px-5 py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+            >Register</a
+            >
         </nav>
     </div>
+
+    <!-- Mobile Menu -->
+    <nav
+            id="mobile-menu"
+            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            role="navigation"
+            aria-label="Mobile Navigation"
+    >
+        <a
+                href="/"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Home</a
+        >
+        <a
+                href="/about"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >About</a
+        >
+        <a
+                href="/notes"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Notes</a
+        >
+        <a
+                href="/questions"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+        >Questions</a
+        >
+        <a
+                href="/login"
+                class="block py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition focus:outline-none focus:ring-2 focus:ring-primary"
+        >Login</a
+        >
+        <a
+                href="/register"
+                class="block py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+        >Register</a
+        >
+    </nav>
 </header>
 
+<!-- Minimal JS for mobile toggle -->
+<script>
+    const toggleButton = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-<!-- MAIN -->
+    toggleButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        toggleButton.setAttribute('aria-expanded', String(!isHidden));
+    });
+</script>
+
+
+<!-- MAIN CONTENT -->
 <main class="max-w-7xl mx-auto px-6 pt-28 pb-20 space-y-40">
 
     <!-- Hero Section -->
@@ -142,7 +224,7 @@
         </p>
     </section>
 
-    <!-- Mission + Image -->
+    <!-- Mission + Image Section -->
     <section class="grid md:grid-cols-2 gap-20 items-center max-w-5xl mx-auto animate-fadeSlideUp" style="animation-delay: 0.4s;">
         <div class="space-y-8 text-gray-300">
             <p class="text-lg font-medium leading-relaxed">
@@ -156,33 +238,58 @@
             </a>
         </div>
         <div class="relative">
-            <img src="/images/hero.png" alt="Students learning" loading="lazy" class="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 ease-in-out" />
+            <!-- Image with onerror fallback -->
+            <img
+                    src="/images/hero.png"
+                    alt="Students learning"
+                    loading="lazy"
+                    class="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 ease-in-out"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/2563eb/ffffff?text=Image+Not+Found';"
+            />
             <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary rounded-full opacity-30 blur-3xl mix-blend-multiply pointer-events-none"></div>
         </div>
     </section>
 
+    <!-- Ad script - Retained as per original request -->
     <script async="async" data-cfasync="false" src="//pl27008957.profitableratecpm.com/d53e3af1da27dd183b6eede90e96a6cc/invoke.js"></script>
     <div id="container-d53e3af1da27dd183b6eede90e96a6cc"></div>
-    <!-- Developers Cards -->
+
+    <!-- Developers Cards Section -->
     <section class="bg-gray-800 rounded-3xl p-12 max-w-6xl mx-auto shadow-xl animate-fadeSlideUp" style="animation-delay: 0.6s;">
         <h2 class="text-4xl font-extrabold text-primary text-center mb-14 select-none drop-shadow-lg">Meet the Developers</h2>
         <div class="flex flex-col md:flex-row justify-center gap-12">
+            <!-- Prasun Tripathi Card -->
             <div
                     class="bg-gray-900 rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer"
                     tabindex="0"
             >
-                <img src="https://i.pravatar.cc/150?u=prasun" alt="Prasun Tripathi" loading="lazy" class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg" />
+                <!-- Avatar with onerror fallback -->
+                <img
+                        src="https://i.pravatar.cc/150?u=prasun"
+                        alt="Prasun Tripathi"
+                        loading="lazy"
+                        class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg"
+                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PT';"
+                />
                 <h3 class="text-2xl font-semibold mb-1 text-gray-100">Prasun Tripathi</h3>
                 <p class="text-primary font-semibold mb-3">Full-stack Developer • Age 17</p>
                 <p class="text-gray-300 leading-relaxed tracking-wide">
                     Backend-focused, passionate about seamless development and building student-centered tools.
                 </p>
             </div>
+            <!-- Prabhas Budathoki Card -->
             <div
                     class="bg-gray-900 rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer"
                     tabindex="0"
             >
-                <img src="https://i.pravatar.cc/150?u=prabhas" alt="Prabhas Budathoki" loading="lazy" class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg" />
+                <!-- Avatar with onerror fallback -->
+                <img
+                        src="https://i.pravatar.cc/150?u=prabhas"
+                        alt="Prabhas Budathoki"
+                        loading="lazy"
+                        class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg"
+                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PB';"
+                />
                 <h3 class="text-2xl font-semibold mb-1 text-gray-100">Prabhas Budathoki</h3>
                 <p class="text-primary font-semibold mb-3">UI Designer & Developer • Age 16</p>
                 <p class="text-gray-300 leading-relaxed tracking-wide">
@@ -192,22 +299,25 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Testimonials Section -->
     <section class="max-w-7xl mx-auto py-20 px-6">
         <h2 class="text-4xl font-extrabold text-primary text-center mb-16 select-none drop-shadow-md">What Users Say</h2>
         <div class="grid gap-10 md:grid-cols-3">
+            <!-- Testimonial 1 -->
             <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
                 <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
                     "NEB Notes helped me so much during exam prep! The notes are simple and to the point."
                 </p>
                 <footer class="text-primary font-semibold text-lg">— Rojit Khadka</footer>
             </blockquote>
+            <!-- Testimonial 2 (Corrected branding) -->
             <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
                 <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
-                    "I never thought studying Computer Science could be this easy. Thank you QuickNotes!"
+                    "I never thought studying Computer Science could be this easy. Thank you NEB Notes!"
                 </p>
                 <footer class="text-primary font-semibold text-lg">— Puspa Kamal Gautam</footer>
             </blockquote>
+            <!-- Testimonial 3 -->
             <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
                 <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
                     "Everything I needed for Class 12 was here. Highly recommend to all NEB students."
@@ -217,22 +327,23 @@
         </div>
     </section>
 
-
 </main>
 
 <!-- FOOTER -->
 <footer class="bg-gray-900 text-gray-400 py-12 mt-20">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between px-8 gap-16">
         <div>
-            <h3 class="text-blue-400 font-extrabold text-2xl mb-3 select-none">QuickNotes</h3>
+            <!-- Corrected branding from QuickNotes to NEB Notes -->
+            <h3 class="text-blue-400 font-extrabold text-2xl mb-3 select-none">NEB Notes</h3>
             <p class="max-w-xs font-light leading-relaxed tracking-wide">
                 Empowering Nepali students with digital tools to unlock their potential.
             </p>
-            <p class="mt-6 text-sm opacity-70">&copy; 2025 QuickNotes. All rights reserved.</p>
+            <p class="mt-6 text-sm opacity-70">&copy; 2025 NEB Notes. All rights reserved.</p>
         </div>
         <div>
             <h4 class="text-blue-400 font-semibold mb-3">Contact</h4>
-            <p class="font-light">Email: <a href="mailto:quicknotes2008@gmail.com" class="hover:text-primary transition">support@quicknotes.com</a></p>
+            <!-- Aligned displayed email with href -->
+            <p class="font-light">Email: <a href="mailto:quicknotes2008@gmail.com" class="hover:text-primary transition">quicknotes2008@gmail.com</a></p>
             <p class="font-light">Phone: <a href="tel:+9779800000000" class="hover:text-primary transition">+977 9800000000</a></p>
         </div>
         <div>
@@ -245,12 +356,19 @@
                 </a>
                 <a href="#" aria-label="Twitter" class="text-sky-400 hover:text-sky-500 transition transform hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
-                        <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.95.562-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.723 0-4.928 2.205-4.928 4.928 0 .39.045.765.127 1.124-4.09-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.574-.666 2.476 0 1.71.87 3.214 2.188 4.096-.807-.026-1.566-.247-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.031-.927-.088.627 1.956 2.444 3.379 4.6 3.42-1.68 1.318-3.808 2.104-6.115 2.104-.397 0-.789-.023-1.175-.069 2.179 1.397 4.768 2.213 7.557 2.213 9.054 0 14.001-7.496 14.001-13.986 0-.21 0-.423-.015-.634.962-.695 1.797-1.562 2.457-2.549z"/>
+                        <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.95.562-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.723 0-4.928 2.205-4.928 4.928 0 .39.045.765.127 1.124-4.09-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.574-.666 2.476 0 1.71.87 3.214 2.188 4.096-.807-.026-1.566-.247-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.928-.086.627 1.956 2.444 3.379 4.6 3.419-1.68 1.317-3.808 2.104-6.115 2.104-.398 0-.79-.023-1.175-.069 2.179 1.397 4.768 2.214 7.557 2.214 9.054 0 14-7.496 14-13.986 0-.21 0-.42-.015-.63.962-.695 1.797-1.562 2.457-2.549z" />
                     </svg>
                 </a>
-                <a href="#" aria-label="Instagram" class="text-pink-600 hover:text-pink-700 transition transform hover:scale-110">
+                <a href="#" aria-label="Instagram" class="text-pink-500 hover:text-pink-600 transition transform hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-7 h-7">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                        <path d="M16 11.37a4 4 0 11-8 0 4 4 0 018 0z" />
+                        <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="LinkedIn" class="text-blue-700 hover:text-blue-800 transition transform hover:scale-110">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
-                        <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-.88a1.12 1.12 0 11-2.24 0 1.12 1.12 0 012.24 0z"/>
+                        <path d="M4.98 3.5C4.98 2.12 6.09 1 7.48 1s2.5 1.12 2.5 2.5-1.11 2.5-2.5 2.5S4.98 4.88 4.98 3.5zM2 8h6v12H2zM9 8h5.5v1.73h.08c.77-1.46 2.66-3 5.47-3 5.85 0 6.93 3.85 6.93 8.86V20H19v-7c0-1.67-.03-3.82-2.33-3.82-2.34 0-2.7 1.82-2.7 3.7V20H9z" />
                     </svg>
                 </a>
             </div>
@@ -258,83 +376,6 @@
     </div>
 </footer>
 
-<!-- Scripts -->
-<script>
-    // Mobile menu toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const menuClose = document.getElementById('menu-close');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileBackdrop = document.getElementById('mobile-backdrop');
-
-    function openMenu() {
-        mobileMenu.classList.remove('hidden');
-        menuToggle.setAttribute('aria-expanded', 'true');
-        // Animate slide-in
-        mobileMenu.querySelector('nav').classList.remove('translate-x-full');
-        mobileMenu.querySelector('nav').classList.add('translate-x-0');
-    }
-    function closeMenu() {
-        menuToggle.setAttribute('aria-expanded', 'false');
-        // Animate slide-out
-        const nav = mobileMenu.querySelector('nav');
-        nav.classList.add('translate-x-full');
-        nav.classList.remove('translate-x-0');
-        setTimeout(() => {
-            mobileMenu.classList.add('hidden');
-        }, 300);
-    }
-
-    menuToggle.addEventListener('click', () => {
-        if (mobileMenu.classList.contains('hidden')) {
-            openMenu();
-        } else {
-            closeMenu();
-        }
-    });
-    menuClose.addEventListener('click', closeMenu);
-    mobileBackdrop.addEventListener('click', closeMenu);
-
-    // Initial nav position for mobile
-    mobileMenu.querySelector('nav').classList.add('translate-x-full', 'transition-transform', 'duration-300', 'ease-in-out');
-
-    // Testimonial carousel logic
-    const testimonials = document.querySelectorAll('.testimonial-item');
-    let currentIndex = 0;
-    const total = testimonials.length;
-
-    function showTestimonial(index) {
-        testimonials.forEach((el, i) => {
-            if(i === index) {
-                el.style.opacity = '1';
-                el.style.position = 'relative';
-                el.style.pointerEvents = 'auto';
-            } else {
-                el.style.opacity = '0';
-                el.style.position = 'absolute';
-                el.style.pointerEvents = 'none';
-            }
-        });
-    }
-
-    document.getElementById('prev-testimonial').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + total) % total;
-        showTestimonial(currentIndex);
-    });
-
-    document.getElementById('next-testimonial').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % total;
-        showTestimonial(currentIndex);
-    });
-
-    // Auto rotate every 7 seconds
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % total;
-        showTestimonial(currentIndex);
-    }, 7000);
-
-    // Show first testimonial on load
-    showTestimonial(0);
-</script>
 
 </body>
 </html>

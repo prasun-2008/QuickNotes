@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark"> <!-- Added 'dark' class for default dark mode -->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,7 +8,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'media',
+      darkMode: 'class', // Changed from 'media' to 'class' for manual control
       theme: {
         extend: {
           colors: {
@@ -36,8 +36,7 @@
   />
 </head>
 <body
-        class="min-h-screen bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col font-sans"
->
+        class="min-h-screen bg-gradient-to-br from-blue-700 via-blue-600 to-indigo-700 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col font-sans"> <!-- Removed overflow-hidden -->
 <!-- NAVBAR -->
 <header
         class="sticky top-0 z-50 bg-white/30 dark:bg-gray-900/30 backdrop-blur-md shadow-md"
@@ -51,29 +50,85 @@
     >NEB Notes</a
     >
 
+    <!-- Hamburger Button and Theme Toggle -->
+    <div class="flex items-center gap-4">
+      <!-- Theme Toggle Button -->
+      <button
+              id="theme-toggle"
+              aria-label="Toggle dark/light theme"
+              class="text-white focus:outline-none focus:ring-2 focus:ring-primary rounded p-1"
+      >
+        <!-- Sun Icon - shown in dark mode -->
+        <svg
+                id="sun-icon"
+                class="w-6 h-6 hidden dark:block"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h1M2 12h1m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+        </svg>
+        <!-- Moon Icon - shown in light mode -->
+        <svg
+                id="moon-icon"
+                class="w-6 h-6 dark:hidden"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+        </svg>
+      </button>
+
+      <!-- Mobile Hamburger -->
+      <button
+              id="menu-toggle"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+              class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded"
+              aria-label="Toggle menu"
+      >
+        <svg
+                class="w-7 h-7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
     <!-- Desktop nav -->
     <nav
-            class="hidden md:flex items-center gap-8 text-lg font-semibold text-white drop-shadow-lg"
-            aria-label="Primary Navigation"
-    >
+            class="hidden md:flex items-center gap-8 text-lg font-semibold text-gray-100 drop-shadow-lg" aria-label="Primary Navigation"> <!-- Adjusted text-color for better light mode contrast -->
+
+
       <a
               href="/"
-              class="hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+              class="hover:text-blue-300 dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
       >Home</a
       >
       <a
               href="/about"
-              class="hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+              class="hover:text-blue-300 dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
       >About</a
       >
       <a
               href="/notes"
-              class="hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+              class="hover:text-blue-300 dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
       >Notes</a
       >
       <a
               href="/questions"
-              class="hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
+              class="hover:text-blue-300 dark:hover:text-blue-300 transition focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
       >Questions</a
       >
       <a
@@ -87,79 +142,47 @@
       >Register</a
       >
     </nav>
-
-    <!-- Mobile Hamburger -->
-    <button
-            id="menu-toggle"
-            aria-controls="mobile-menu"
-            aria-expanded="false"
-            class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary rounded"
-            aria-label="Toggle menu"
-    >
-      <svg
-              class="w-7 h-7"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-      >
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
   </div>
 
   <!-- Mobile Menu -->
   <nav
           id="mobile-menu"
-          class="md:hidden hidden flex-col gap-3 px-6 pb-6 text-white text-lg font-semibold bg-gradient-to-b from-blue-900 to-indigo-900"
-          role="navigation"
-          aria-label="Mobile Navigation"
+          class="md:hidden hidden flex-col gap-3 px-6 pb-6 text-gray-100 text-lg font-semibold bg-gradient-to-b from-blue-900 to-indigo-900 dark:from-gray-800 dark:to-gray-900" <!-- Adjusted mobile menu background for dark mode -->
+  role="navigation"
+  aria-label="Mobile Navigation"
   >
-    <a
-            href="/"
-            class="block py-2 hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-    >Home</a
-    >
-    <a
-            href="/about"
-            class="block py-2 hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-    >About</a
-    >
-    <a
-            href="/notes"
-            class="block py-2 hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-    >Notes</a
-    >
-    <a
-            href="/questions"
-            class="block py-2 hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
-    >Questions</a
-    >
-    <a
-            href="/login"
-            class="block py-2 border border-white/75 rounded hover:bg-white hover:text-primary transition focus:outline-none focus:ring-2 focus:ring-primary"
-    >Login</a
-    >
-    <a
-            href="/register"
-            class="block py-2 bg-primary text-white rounded hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-primary"
-    >Register</a
-    >
+  <a
+          href="/"
+          class="block py-2 hover:text-blue-300 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+  >Home</a
+  >
+  <a
+          href="/about"
+          class="block py-2 hover:text-blue-300 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+  >About</a
+  >
+  <a
+          href="/notes"
+          class="block py-2 hover:text-blue-300 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+  >Notes</a
+  >
+  <a
+          href="/questions"
+          class="block py-2 hover:text-blue-300 dark:hover:text-blue-300 focus:outline-none focus:ring-2 focus:ring-primary rounded font-semibold"
+  >Questions</a
+  >
+  <a
+          href="/login"
+          class="block py-2 border border-white/75 rounded hover:bg-white hover:text-primary transition focus:outline-none focus:ring-2 focus:ring-primary"
+  >Login</a
+  >
+  <a
+          href="/register"
+          class="block py-2 bg-primary text-white rounded hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-primary"
+  >Register</a
+  >
   </nav>
 </header>
-
-<!-- Mobile Menu Toggle Script -->
-<script>
-  const toggleButton = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  toggleButton.addEventListener('click', () => {
-    const isHidden = mobileMenu.classList.toggle('hidden');
-    toggleButton.setAttribute('aria-expanded', String(!isHidden));
-  });
-</script>
 
 <!-- REGISTER FORM -->
 <main
@@ -251,9 +274,9 @@
       <button
               type="submit"
               class="w-full bg-primary hover:bg-blue-700 focus:bg-blue-700 text-white font-extrabold text-xl py-4 rounded-2xl shadow-lg transition focus:outline-none focus:ring-4 focus:ring-primary/70"
-              aria-label="Register your QuickNotes account"
+              aria-label="Register your NEB Notes account" <!-- Corrected branding here -->
       >
-        Register
+      Register
       </button>
     </form>
 
@@ -269,5 +292,39 @@
     </p>
   </section>
 </main>
+
+<!-- Theme toggle and mobile menu JavaScript -->
+<script>
+  const htmlElement = document.documentElement;
+  const themeToggle = document.getElementById('theme-toggle');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Initialize theme based on localStorage or default to dark
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'light') {
+    htmlElement.classList.remove('dark');
+  } else {
+    // Default to dark if no theme is saved or if it's 'dark'
+    htmlElement.classList.add('dark');
+  }
+
+  // Theme toggle functionality
+  themeToggle.addEventListener('click', () => {
+    if (htmlElement.classList.contains('dark')) {
+      htmlElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      htmlElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+  // Mobile menu toggle functionality
+  menuToggle.addEventListener('click', () => {
+    const isHidden = mobileMenu.classList.toggle('hidden');
+    menuToggle.setAttribute('aria-expanded', String(!isHidden));
+  });
+</script>
 </body>
 </html>

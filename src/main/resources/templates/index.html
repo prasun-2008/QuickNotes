@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark"> <!-- Added 'dark' class here to force dark mode by default -->
 <head>
     <meta charset="UTF-8" />
     <title>NEB Notes - Comprehensive Class 11 & 12 Notes by Prasun Tripathi</title>
@@ -31,11 +31,10 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Tailwind CSS -->
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: 'media',
+            darkMode: 'class', // Changed to 'class' so we can control dark mode via a class on the html tag
             theme: {
                 extend: {
                     colors: {
@@ -46,7 +45,7 @@
         }
     </script>
 
-
+    <!-- Schema.org Markup for EducationalOrganization -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
@@ -57,18 +56,19 @@
                 {
                     "@type": "Person",
                     "name": "Prasun Tripathi",
-                    "url": "https://nebnotes.onrender.com/"
+                    "url": "https://nebnotes.onrender.com/about"
                 },
                 {
                     "@type": "Person",
                     "name": "Prabhas Budathoki",
-                    "url": "https://nebnotes.onrender.com/"
+                    "url": "https://nebnotes.onrender.com/about"
                 }
-            ]
+            ],
+            "description": "NEB Notes provides well-organized, NEB-based notes and question sets for Class 12 Computer Science, simplifying learning for Nepali students.",
+            "logo": "https://nebnotes.onrender.com/images/logo.png"
         }
     </script>
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans antialiased">
@@ -88,30 +88,63 @@
         >NEB Notes</a
         >
 
-        <!-- Hamburger Button -->
-        <button
-                id="menu-toggle"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-                aria-label="Toggle menu"
-        >
-            <svg
-                    class="w-7 h-7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
+        <!-- Hamburger Button and Theme Toggle -->
+        <div class="flex items-center gap-4">
+            <button
+                    id="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded p-1"
             >
-                <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-            </svg>
-        </button>
+                <!-- Sun Icon -->
+                <svg
+                        id="sun-icon"
+                        class="w-6 h-6 hidden dark:block"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h1M2 12h1m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <!-- Moon Icon -->
+                <svg
+                        id="moon-icon"
+                        class="w-6 h-6 dark:hidden"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+
+            <button
+                    id="menu-toggle"
+                    aria-controls="mobile-menu"
+                    aria-expanded="false"
+                    class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    aria-label="Toggle menu"
+            >
+                <svg
+                        class="w-7 h-7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                </svg>
+            </button>
+        </div>
 
         <!-- Desktop Nav -->
         <nav
@@ -188,17 +221,6 @@
     </nav>
 </header>
 
-<!-- Minimal JS for mobile toggle -->
-<script>
-    const toggleButton = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    toggleButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        toggleButton.setAttribute('aria-expanded', String(!isHidden));
-    });
-</script>
-
 <!-- HERO SECTION -->
 <section
         class="px-6 py-20 bg-white dark:bg-gray-900"
@@ -242,6 +264,7 @@
                     alt="Study Illustration"
                     class="rounded-3xl shadow-2xl w-full max-w-[580px] object-cover dark:brightness-90"
                     loading="lazy"
+                    onerror="this.onerror=null;this.src='https://placehold.co/580x380/2563eb/ffffff?text=Hero+Image';"
             />
         </div>
     </div>
@@ -386,7 +409,8 @@
                 <div
                         class="w-28 h-28 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-5xl font-bold text-white mb-6 select-none"
                 >
-                    PT
+                    <!-- Fallback for profile image -->
+                    <img src="https://i.pravatar.cc/150?u=prasun" alt="Prasun Tripathi" class="rounded-full w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PT';" />
                 </div>
                 <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
                     Prasun Tripathi
@@ -405,7 +429,8 @@
                 <div
                         class="w-28 h-28 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-5xl font-bold text-white mb-6 select-none"
                 >
-                    PB
+                    <!-- Fallback for profile image -->
+                    <img src="https://i.pravatar.cc/150?u=prabhas" alt="Prabhas Budathoki" class="rounded-full w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PB';" />
                 </div>
                 <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
                     Prabhas Budathoki
@@ -440,7 +465,7 @@
                 <svg class="w-10 h-10 text-primary mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M7 7h2v4H5v6h6v-6H9V7zm10 0h2v4h-4v6h6v-6h-2V7z"/>
                 </svg>
-                <p class="italic text-gray-700 dark:text-gray-300 mb-4 text-base">"I never thought studying Computer Science could be this easy. Thank you QuickNotes!"</p>
+                <p class="italic text-gray-700 dark:text-gray-300 mb-4 text-base">"I never thought studying Computer Science could be this easy. Thank you NEB Notes!"</p>
                 <h3 class="font-semibold text-lg text-primary">Puspa Kamal Gautam</h3>
             </div>
             <!-- Riwaz -->
@@ -521,20 +546,17 @@
     </div>
 </section>
 
-<script async="async" data-cfasync="false" src="//pl27008957.profitableratecpm.com/d53e3af1da27dd183b6eede90e96a6cc/invoke.js"></script>
-<div id="container-d53e3af1da27dd183b6eede90e96a6cc"></div>
-
 
 <!-- FOOTER -->
 <footer
-        class="bg-gray-900 text-gray-300 py-16 px-6 select-none"
+        class="bg-gray-900 text-gray-300 dark:bg-gray-950 dark:text-gray-400 py-16 px-6 select-none"
         role="contentinfo"
 >
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         <!-- About -->
         <div>
-            <h3 class="text-xl font-bold text-white mb-4">NEB Notes</h3>
-            <p class="text-gray-400 leading-relaxed">
+            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">NEB Notes</h3>
+            <p class="text-gray-400 dark:text-gray-500 leading-relaxed">
                 Your go-to hub for Grade 12 NEB Computer Science notes and question
                 sets.
                 <br />
@@ -545,7 +567,7 @@
 
         <!-- Quick Links -->
         <nav aria-label="Footer Navigation">
-            <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">Quick Links</h3>
             <ul class="space-y-3">
                 <li>
                     <a
@@ -592,12 +614,9 @@
             </ul>
         </nav>
 
-
-
-
         <!-- Contact -->
         <address class="not-italic space-y-2 text-gray-400">
-            <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">Contact Us</h3>
             <p>📍 Kathmandu, Nepal</p>
             <p>📞 +977 9800000000</p>
             <p>
@@ -605,14 +624,14 @@
                 <a
                         href="mailto:quicknotes2008@gmail.com"
                         class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
-                >support@quicknotes.com</a
+                >quicknotes2008@gmail.com</a
                 >
             </p>
         </address>
 
         <!-- Social -->
         <div>
-            <h3 class="text-xl font-bold text-white mb-4">Follow Us</h3>
+            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">Follow Us</h3>
             <div class="flex space-x-6">
                 <a
                         href="#"
@@ -678,13 +697,46 @@
         </div>
     </div>
     <div
-            class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-500 text-sm"
+            class="border-t border-gray-700 dark:border-gray-800 mt-12 pt-8 text-center text-gray-500 dark:text-gray-500 text-sm"
     >
         &copy; 2025 NEB Notes. All rights reserved.
     </div>
 
 </footer>
 
+<!-- Theme toggle and mobile menu JavaScript -->
+<script>
+    const htmlElement = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Initialize theme based on localStorage or default to dark
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light') {
+        htmlElement.classList.remove('dark');
+    } else {
+        // Default to dark if no theme is saved or if it's 'dark'
+        htmlElement.classList.add('dark');
+    }
+
+    // Theme toggle functionality
+    themeToggle.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+            htmlElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            htmlElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+
+    // Mobile menu toggle functionality
+    menuToggle.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        menuToggle.setAttribute('aria-expanded', String(!isHidden));
+    });
+</script>
 
 </body>
 </html>
