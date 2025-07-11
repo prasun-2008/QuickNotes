@@ -218,6 +218,10 @@
     <form action="/register" method="POST" class="space-y-10" novalidate>
       <!-- Full Name -->
       <div class="relative z-10">
+        <!-- 🛡️ CSRF protection -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+
         <input
                 type="text"
                 id="fullname"

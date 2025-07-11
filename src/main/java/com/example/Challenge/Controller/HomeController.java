@@ -38,7 +38,13 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
+        Notes notes = new Notes();
+        notes.setTitle("Periodic Motion Class 12");
+        notes.setDescription("Complete handwritten notes for periodic motion chapter class 12");
+        notes.setDriveEmbedLink("");
+        notesServices.createNote(notes);
         return "index";
+
     }
 
     @GetMapping("/login")
@@ -84,14 +90,27 @@ public class HomeController {
     public String questions(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
+        if (auth == null || !auth.isAuthenticated()) {
+            return "redirect:/login";
+        }
+
         String email = auth.getName();
+        System.out.println("Logged in user email: " + email);
+
         UserModel user = userService.findByEmail(email);
 
-        model.addAttribute("fullname", "Welcome! " + user.getFullName());
-        model.addAttribute("questions", questionService.getAllQuestions()); // this line is key
+        if (user == null) {
+            System.out.println("User not found in DB for email: " + email);
+            model.addAttribute("errorMessage", "User not found.");
+            return "error"; // Show a friendly error page or redirect
+        }
 
-        return "Questions"; // must match your Thymeleaf file: templates/Questions.html
+        model.addAttribute("fullname", "Welcome! " + user.getFullName());
+        model.addAttribute("questions", questionService.getAllQuestions());
+
+        return "Questions";
     }
+
 
 
     @PostMapping("/message")
