@@ -38,11 +38,14 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        Notes notes = new Notes();
-        notes.setTitle("Periodic Motion Class 12");
-        notes.setDescription("Complete handwritten notes for periodic motion chapter class 12");
-        notes.setDriveEmbedLink("");
-        notesServices.createNote(notes);
+//
+//        notesServices.deleteAll();
+//        Notes notes = new Notes();
+//        notes.setTitle("Database Management System Class 12");
+//        notes.setDescription("Complete notes for Database Management System computer NEB class 12");
+//        notes.setDriveEmbedLink("https://drive.google.com/file/d/1Y6QVhGnwJQhZvQZM59N-cT_Uqg4lPfFx/preview");
+//        notesServices.createNote(notes);
+
         return "index";
 
     }

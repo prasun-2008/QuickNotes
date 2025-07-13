@@ -28,4 +28,8 @@ public class NotesServices {
         return notesRepo.findById(id).get();
     }
 
+    public void deleteAll(){
+        notesRepo.deleteAll();
+    }
+
 }
