@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark"> <!-- Added 'dark' class here to force dark mode by default -->
+<html lang="en" class="scroll-smooth dark"> <!-- Dark class remains for default dark mode -->
 <head>
     <meta charset="UTF-8" />
     <title>NEB Notes - Comprehensive Class 11 & 12 Notes by Prasun Tripathi</title>
@@ -38,7 +38,52 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb',
+                        primary: '#6366f1', // Indigo 500
+                        secondary: '#818cf8', // Indigo 400
+                        accent: '#a78bfa', // Violet 400 - for highlights
+                        darkBg: '#0f172a', // Slate 900 - very dark background
+                        darkerBg: '#020617', // Slate 950 - even darker for footer
+                        darkCard: '#1e293b', // Slate 800 - for card backgrounds
+                        darkText: '#e2e8f0', // Slate 200 - light text
+                        lightText: '#f8fafc', // Slate 50 - pure white text for contrast
+                        subtleText: '#94a3b8', // Slate 400 - for secondary text
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
+                        'fade-in-left': 'fadeInLeft 0.7s ease-out forwards',
+                        'fade-in-right': 'fadeInRight 0.7s ease-out forwards',
+                        'scale-in': 'scaleIn 0.6s ease-out forwards',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'rotate-icon': 'rotateIcon 0.3s ease-out', /* New animation for icon rotation */
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        fadeInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { 'box-shadow': '0 0 0px rgba(99, 102, 241, 0)' },
+                            '50%': { 'box-shadow': '0 0 15px rgba(99, 102, 241, 0.6)' },
+                        },
+                        rotateIcon: { /* New keyframe for icon rotation */
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
                     },
                 },
             },
@@ -68,23 +113,23 @@
             "logo": "https://nebnotes.onrender.com/images/logo.png"
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 
-<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans antialiased">
+<body class="bg-white text-gray-800 font-sans antialiased transition-colors duration-500 dark:bg-darkBg dark:text-darkText">
 
 <!-- NAVBAR -->
 <header
-        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-xl border-b border-gray-200 dark:bg-darkBg/90 dark:border-gray-800"
         role="banner"
 >
     <div
-            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+            class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
     >
         <!-- Brand -->
         <a
                 href="/"
-                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
         >NEB Notes</a
         >
 
@@ -93,12 +138,12 @@
             <button
                     id="theme-toggle"
                     aria-label="Toggle dark/light theme"
-                    class="text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded p-1"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-2 bg-gray-100 hover:bg-primary/20 shadow-md dark:text-darkText dark:bg-darkCard"
             >
-                <!-- Sun Icon -->
+                <!-- Sun Icon - Initially displayed if dark mode is active -->
                 <svg
                         id="sun-icon"
-                        class="w-6 h-6 hidden dark:block"
+                        class="w-6 h-6"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
@@ -107,10 +152,10 @@
                 >
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h1M2 12h1m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
-                <!-- Moon Icon -->
+                <!-- Moon Icon - Initially hidden if dark mode is active -->
                 <svg
                         id="moon-icon"
-                        class="w-6 h-6 dark:hidden"
+                        class="w-6 h-6 hidden"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
@@ -125,7 +170,7 @@
                     id="menu-toggle"
                     aria-controls="mobile-menu"
                     aria-expanded="false"
-                    class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="md:hidden text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-1 dark:text-darkText"
                     aria-label="Toggle menu"
             >
                 <svg
@@ -154,28 +199,28 @@
         >
             <a
                     href="/"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >Home</a
             >
             <a
                     href="/about"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >About</a
             >
             <a
                     href="/notes"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >Notes</a
             >
             <a
                     href="/questions"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >Questions</a
             >
 
             <a
                     href="register"
-                    class="px-5 py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+                    class="px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-secondary shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
             >Register</a
             >
         </nav>
@@ -184,38 +229,38 @@
     <!-- Mobile Menu -->
     <nav
             id="mobile-menu"
-            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium bg-white/95 shadow-inner dark:bg-darkBg/95"
             role="navigation"
             aria-label="Mobile Navigation"
     >
         <a
                 href="/"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >Home</a
         >
         <a
                 href="/about"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >About</a
         >
         <a
                 href="/notes"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >Notes</a
         >
         <a
                 href="/questions"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >Questions</a
         >
         <a
                 href="/login"
-                class="block py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition focus:outline-none focus:ring-2 focus:ring-primary"
+                class="block py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary mt-2"
         >Login</a
         >
         <a
                 href="/register"
-                class="block py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+                class="block py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary mt-2"
         >Register</a
         >
     </nav>
@@ -223,48 +268,50 @@
 
 <!-- HERO SECTION -->
 <section
-        class="px-6 py-20 bg-white dark:bg-gray-900"
+        class="relative overflow-hidden px-6 py-24 md:py-32 bg-gradient-to-br from-white to-gray-100 dark:from-darkBg dark:to-gray-900"
         aria-label="Hero Section"
 >
+    <!-- Background Gradient Overlay -->
+    <div class="absolute inset-0 z-0 opacity-20" style="background: radial-gradient(circle at top left, var(--tw-colors-primary) 0%, transparent 50%), radial-gradient(circle at bottom right, var(--tw-colors-secondary) 0%, transparent 50%);"></div>
+
     <div
-            class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10"
+            class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16 relative z-10"
     >
         <!-- Text Left -->
-        <div class="w-full md:w-1/2 text-center md:text-left">
+        <div class="w-full md:w-1/2 text-center md:text-left animate-fade-in-left">
             <h1
-                    class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white leading-snug mb-6"
+                    class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-tight mb-6 drop-shadow-xl dark:text-lightText"
             >
-                Grade 12 Computer Science Notes & Questions
+                Master Class 12 Computer Science <br class="hidden lg:inline"/> with NEB Notes.
             </h1>
-            <p class="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">
-                NEB Notes provides you with well-organized, NEB-based notes and
-                question sets for Class 12 Computer Science. Stay ahead with
-                simplified learning — all in one place.
+            <p class="text-xl text-gray-700 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed dark:text-subtleText">
+                Unlock comprehensive, NEB-aligned notes and past questions. Simplify your learning,
+                excel in exams, and achieve academic brilliance.
             </p>
             <div
                     class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start max-w-md mx-auto md:mx-0"
             >
                 <a
                         href="/notes"
-                        class="px-7 py-3 bg-primary text-white rounded-md text-lg font-semibold hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
+                        class="px-9 py-4 bg-primary text-white rounded-xl text-lg font-bold hover:bg-secondary shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary/50 animate-pulse-glow"
                 >Explore Notes</a
                 >
                 <a
                         href="/questions"
-                        class="px-7 py-3 border border-primary text-primary rounded-md text-lg font-semibold hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-700"
+                        class="px-9 py-4 border-2 border-primary text-primary rounded-xl text-lg font-bold hover:bg-primary hover:text-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary/50"
                 >View Questions</a
                 >
             </div>
         </div>
 
         <!-- Image Right (Bigger) -->
-        <div class="w-full md:w-1/2 flex justify-center">
+        <div class="w-full md:w-1/2 flex justify-center animate-fade-in-right delay-200">
             <img
                     src="/images/hero.png"
                     alt="Study Illustration"
-                    class="rounded-3xl shadow-2xl w-full max-w-[580px] object-cover dark:brightness-90"
+                    class="rounded-3xl shadow-2xl w-full max-w-[650px] object-cover border-4 border-accent transform rotate-3 hover:rotate-0 transition-transform duration-500"
                     loading="lazy"
-                    onerror="this.onerror=null;this.src='https://placehold.co/580x380/2563eb/ffffff?text=Hero+Image';"
+                    onerror="this.onerror=null;this.src='https://placehold.co/650x450/e2e8f0/1e293b?text=NEB+Notes+Hero+Image';"
             />
         </div>
     </div>
@@ -272,17 +319,17 @@
 
 <!-- FEATURES SECTION -->
 <section
-        class="bg-gray-50 dark:bg-gray-900 py-20 px-6"
+        class="bg-gray-50 py-24 px-6 dark:bg-darkBg"
         aria-label="Features Section"
 >
-    <div class="max-w-7xl mx-auto text-center mb-16 px-4 sm:px-0">
+    <div class="max-w-7xl mx-auto text-center mb-20 px-4 sm:px-0">
         <h2
-                class="text-4xl font-extrabold text-gray-900 dark:text-white mb-5"
+                class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 animate-fade-in-up dark:text-lightText"
         >
-            Why Choose NEB Notes?
+            Why Choose <span class="text-primary">NEB Notes</span>?
         </h2>
         <p
-                class="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-lg leading-relaxed"
+                class="text-gray-600 max-w-3xl mx-auto text-xl leading-relaxed animate-fade-in-up delay-100 dark:text-subtleText"
         >
             Simplify your learning with concise notes, curated question sets, and
             easy access — all tailored for Grade 12 NEB Computer Science.
@@ -290,110 +337,119 @@
     </div>
 
     <div
-            class="max-w-7xl mx-auto grid gap-12 sm:grid-cols-2 md:grid-cols-3 px-4 sm:px-0"
+            class="max-w-7xl mx-auto grid gap-12 sm:grid-cols-2 lg:grid-cols-3 px-4 sm:px-0"
     >
         <!-- Feature 1 -->
         <article
-                class="bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-xl transform hover:scale-105 transition duration-300"
+                class="bg-white rounded-2xl p-10 shadow-xl border border-gray-200 transform hover:scale-105 transition duration-300 ease-in-out group relative overflow-hidden animate-scale-in dark:bg-darkCard dark:border-gray-700"
         >
-            <div class="mb-6 text-blue-600 dark:text-blue-400">
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="mx-auto h-16 w-16"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                >
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 14l9-5-9-5-9 5 9 5z"
-                    />
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.34 6.211L12 21l-6.5-4.211a12.084 12.084 0 01.34-6.21L12 14z"
-                    />
-                </svg>
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+            <div class="relative z-10">
+                <div class="mb-6 text-primary group-hover:text-secondary transition-colors duration-300">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="mx-auto h-16 w-16"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                    >
+                        <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 14l9-5-9-5-9 5 9 5z"
+                        />
+                        <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 14l6.16-3.422a12.083 12.083 0 01.34 6.211L12 21l-6.5-4.211a12.084 12.084 0 01.34-6.21L12 14z"
+                        />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-900 group-hover:text-primary transition-colors duration-300 dark:text-lightText">
+                    Curated Notes
+                </h3>
+                <p class="text-gray-700 text-base leading-relaxed dark:text-subtleText">
+                    Well-organized notes following the NEB syllabus, perfect for quick
+                    revision and exam prep.
+                </p>
             </div>
-            <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
-                Curated Notes
-            </h3>
-            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                Well-organized notes following the NEB syllabus, perfect for quick
-                revision and exam prep.
-            </p>
         </article>
 
         <!-- Feature 2 -->
         <article
-                class="bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-xl transform hover:scale-105 transition duration-300"
+                class="bg-white rounded-2xl p-10 shadow-xl border border-gray-200 transform hover:scale-105 transition duration-300 ease-in-out group relative overflow-hidden animate-scale-in delay-100 dark:bg-darkCard dark:border-gray-700"
         >
-            <div class="mb-6 text-blue-600 dark:text-blue-400">
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="mx-auto h-16 w-16"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                >
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M9 17v-6h13v6M9 12h13v-3H9M9 7h13v-3H9M4 20h2v-7H4v7z"
-                    />
-                </svg>
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+            <div class="relative z-10">
+                <div class="mb-6 text-primary group-hover:text-secondary transition-colors duration-300">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="mx-auto h-16 w-16"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                    >
+                        <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 17v-6h13v6M9 12h13v-3H9M9 7h13v-3H9M4 20h2v-7H4v7z"
+                        />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-900 group-hover:text-primary transition-colors duration-300 dark:text-lightText">
+                    Downloadable Questions
+                </h3>
+                <p class="text-gray-700 text-base leading-relaxed dark:text-subtleText">
+                    Easily download question sets to practice offline and ace your exams.
+                </p>
             </div>
-            <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
-                Downloadable Questions
-            </h3>
-            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                Easily download question sets to practice offline and ace your exams.
-            </p>
         </article>
 
         <!-- Feature 3 -->
         <article
-                class="bg-white dark:bg-gray-800 rounded-3xl p-10 shadow-xl transform hover:scale-105 transition duration-300"
+                class="bg-white rounded-2xl p-10 shadow-xl border border-gray-200 transform hover:scale-105 transition duration-300 ease-in-out group relative overflow-hidden animate-scale-in delay-200 dark:bg-darkCard dark:border-gray-700"
         >
-            <div class="mb-6 text-blue-600 dark:text-blue-400">
-                <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="mx-auto h-16 w-16"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                >
-                    <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M16 12H8m8 0v4a2 2 0 01-2 2H10a2 2 0 01-2-2v-4m8-4H8m8 0V8a2 2 0 00-2-2H10a2 2 0 00-2 2v4"
-                    />
-                </svg>
+            <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+            <div class="relative z-10">
+                <div class="mb-6 text-primary group-hover:text-secondary transition-colors duration-300">
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="mx-auto h-16 w-16"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                    >
+                        <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M16 12H8m8 0v4a2 2 0 01-2 2H10a2 2 0 01-2-2v-4m8-4H8m8 0V8a2 2 0 00-2-2H10a2 2 0 00-2 2v4"
+                        />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold mb-3 text-gray-900 group-hover:text-primary transition-colors duration-300 dark:text-lightText">
+                    Email Notes
+                </h3>
+                <p class="text-gray-700 text-base leading-relaxed dark:text-subtleText">
+                    Get your notes emailed directly to you for convenience and quick
+                    access anytime.
+                </p>
             </div>
-            <h3 class="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
-                Email Notes
-            </h3>
-            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
-                Get your notes emailed directly to you for convenience and quick
-                access anytime.
-            </p>
         </article>
     </div>
 </section>
 
 <section
-        class="bg-gray-50 dark:bg-gray-900 py-20 px-6"
+        class="bg-gray-100 py-24 px-6 dark:bg-gray-900"
         aria-label="About the Developers"
 >
     <div class="max-w-5xl mx-auto text-center">
-        <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-8">
-            Meet the Developers
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-8 animate-fade-in-up dark:text-lightText">
+            Meet the <span class="text-primary">Developers</span>
         </h2>
-        <p class="text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 text-lg leading-relaxed">
+        <p class="text-gray-700 max-w-3xl mx-auto mb-16 text-xl leading-relaxed animate-fade-in-up delay-100 dark:text-subtleText">
             Prasun Tripathi and Prabhas Budathoki are two ambitious young developers, aged
             17 and 16 respectively, who are passionate about digitalizing and simplifying
             computer science education for Nepali students. Their goal is to make Grade 12
@@ -404,18 +460,18 @@
         <div class="flex flex-col sm:flex-row justify-center gap-12">
             <!-- Prasun Card -->
             <div
-                    class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 max-w-sm mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-4 hover:ring-blue-500 dark:hover:ring-blue-400 cursor-pointer"
+                    class="bg-white rounded-2xl shadow-xl p-8 max-w-sm mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl border border-gray-200 hover:border-primary cursor-pointer group animate-scale-in delay-200 dark:bg-darkCard dark:border-gray-700"
             >
                 <div
-                        class="w-28 h-28 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-5xl font-bold text-white mb-6 select-none"
+                        class="w-32 h-32 mx-auto rounded-full bg-primary flex items-center justify-center text-5xl font-bold text-white mb-6 overflow-hidden border-4 border-transparent group-hover:border-secondary transition-colors duration-300"
                 >
                     <!-- Fallback for profile image -->
-                    <img src="https://i.pravatar.cc/150?u=prasun" alt="Prasun Tripathi" class="rounded-full w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PT';" />
+                    <img src="https://i.pravatar.cc/150?u=prasun" alt="Prasun Tripathi" class="rounded-full w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/150x150/6366f1/f8fafc?text=PT';" />
                 </div>
-                <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+                <h3 class="text-2xl font-semibold mb-2 text-gray-900 group-hover:text-primary transition-colors duration-300 dark:text-lightText">
                     Prasun Tripathi
                 </h3>
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                <p class="text-gray-700 leading-relaxed text-base dark:text-subtleText">
                     A passionate 17-year-old developer, Prasun leads the backend and
                     full-stack development of NEB Notes, determined to empower students
                     through technology.
@@ -424,18 +480,18 @@
 
             <!-- Prabhas Card -->
             <div
-                    class="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 max-w-sm mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-4 hover:ring-blue-500 dark:hover:ring-blue-400 cursor-pointer"
+                    class="bg-white rounded-2xl shadow-xl p-8 max-w-sm mx-auto transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl border border-gray-200 hover:border-primary cursor-pointer group animate-scale-in delay-300 dark:bg-darkCard dark:border-gray-700"
             >
                 <div
-                        class="w-28 h-28 mx-auto rounded-full bg-blue-500 flex items-center justify-center text-5xl font-bold text-white mb-6 select-none"
+                        class="w-32 h-32 mx-auto rounded-full bg-primary flex items-center justify-center text-5xl font-bold text-white mb-6 overflow-hidden border-4 border-transparent group-hover:border-secondary transition-colors duration-300"
                 >
                     <!-- Fallback for profile image -->
-                    <img src="https://i.pravatar.cc/150?u=prabhas" alt="Prabhas Budathoki" class="rounded-full w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PB';" />
+                    <img src="https://i.pravatar.cc/150?u=prabhas" alt="Prabhas Budathoki" class="rounded-full w-full h-full object-cover transition-transform duration-300 hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/150x150/6366f1/f8fafc?text=PB';" />
                 </div>
-                <h3 class="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
+                <h3 class="text-2xl font-semibold mb-2 text-gray-900 group-hover:text-primary transition-colors duration-300 dark:text-lightText">
                     Prabhas Budathoki
                 </h3>
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                <p class="text-gray-700 leading-relaxed text-base dark:text-subtleText">
                     At 16 years old, Prabhas shapes the design and user experience of NEB Notes,
                     blending creativity with usability for an effective learning platform.
                 </p>
@@ -444,59 +500,58 @@
     </div>
 </section>
 
-<script async="async" data-cfasync="false" src="//pl27008957.profitableratecpm.com/d53e3af1da27dd183b6eede90e96a6cc/invoke.js"></script>
-<div id="container-d53e3af1da27dd183b6eede90e96a6cc"></div>
+
 
 <!-- TESTIMONIALS SECTION -->
-<section class="bg-gradient-to-br from-gray-100 to-white dark:from-gray-800 dark:to-gray-900 py-20 px-6">
+<section class="bg-gray-50 py-24 px-6 dark:bg-darkBg">
     <div class="max-w-6xl mx-auto text-center">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-16 tracking-tight">What Our Users Say</h2>
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-16 tracking-tight animate-fade-in-up dark:text-lightText">What Our Users <span class="text-primary">Say</span></h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
             <!-- Rojit -->
-            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-200 dark:border-gray-700">
-                <svg class="w-10 h-10 text-primary mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-200 hover:border-secondary group animate-scale-in delay-100 dark:bg-darkCard dark:border-gray-700">
+                <svg class="w-12 h-12 text-primary mx-auto mb-4 group-hover:text-secondary transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M7 7h2v4H5v6h6v-6H9V7zm10 0h2v4h-4v6h6v-6h-2V7z"/>
                 </svg>
-                <p class="italic text-gray-700 dark:text-gray-300 mb-4 text-base">"NEB Notes helped me so much during exam prep! The notes are simple and to the point."</p>
-                <h3 class="font-semibold text-lg text-primary">Rojit Khadka</h3>
+                <p class="italic text-gray-700 mb-4 text-lg dark:text-subtleText">"NEB Notes helped me so much during exam prep! The notes are simple and to the point, making complex topics easy to grasp."</p>
+                <h3 class="font-semibold text-xl text-primary group-hover:text-secondary transition-colors duration-300">Rojit Khadka</h3>
             </div>
             <!-- Puspa -->
-            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-200 dark:border-gray-700">
-                <svg class="w-10 h-10 text-primary mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-200 hover:border-secondary group animate-scale-in delay-200 dark:bg-darkCard dark:border-gray-700">
+                <svg class="w-12 h-12 text-primary mx-auto mb-4 group-hover:text-secondary transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M7 7h2v4H5v6h6v-6H9V7zm10 0h2v4h-4v6h6v-6h-2V7z"/>
                 </svg>
-                <p class="italic text-gray-700 dark:text-gray-300 mb-4 text-base">"I never thought studying Computer Science could be this easy. Thank you NEB Notes!"</p>
-                <h3 class="font-semibold text-lg text-primary">Puspa Kamal Gautam</h3>
+                <p class="italic text-gray-700 mb-4 text-lg dark:text-subtleText">"I never thought studying Computer Science could be this easy. The structured content and clear explanations are a game-changer. Thank you NEB Notes!"</p>
+                <h3 class="font-semibold text-xl text-primary group-hover:text-secondary transition-colors duration-300">Puspa Kamal Gautam</h3>
             </div>
             <!-- Riwaz -->
-            <div class="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-200 dark:border-gray-700">
-                <svg class="w-10 h-10 text-primary mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 border border-gray-200 hover:border-secondary group animate-scale-in delay-300 dark:bg-darkCard dark:border-gray-700">
+                <svg class="w-12 h-12 text-primary mx-auto mb-4 group-hover:text-secondary transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M7 7h2v4H5v6h6v-6H9V7zm10 0h2v4h-4v6h6v-6h-2V7z"/>
                 </svg>
-                <p class="italic text-gray-700 dark:text-gray-300 mb-4 text-base">"Everything I needed for Class 12 was here. Highly recommend to all NEB students."</p>
-                <h3 class="font-semibold text-lg text-primary">Riwaz Nepal</h3>
+                <p class="italic text-gray-700 mb-4 text-lg dark:text-subtleText">"Everything I needed for Class 12 was here, from detailed notes to past questions. Highly recommend to all NEB students looking for a reliable resource."</p>
+                <h3 class="font-semibold text-xl text-primary group-hover:text-secondary transition-colors duration-300">Riwaz Nepal</h3>
             </div>
         </div>
     </div>
 </section>
 
 
-<section class="bg-white dark:bg-gray-900 py-20 px-6" aria-label="Contact Form Section">
+<section class="bg-gray-100 py-24 px-6 dark:bg-gray-900" aria-label="Contact Form Section">
     <div class="max-w-4xl mx-auto">
-        <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6 text-center">
-            Get In Touch
+        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 text-center animate-fade-in-up dark:text-lightText">
+            Get In <span class="text-primary">Touch</span>
         </h2>
-        <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-xl mx-auto">
+        <p class="text-center text-gray-700 mb-12 max-w-xl mx-auto text-xl animate-fade-in-up delay-100 dark:text-subtleText">
             Questions? Need notes emailed? Drop us a message — we’ll get back to you fast.
         </p>
 
-        <form action="/message" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <form action="/message" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white p-10 rounded-2xl shadow-2xl border border-gray-200 animate-scale-in delay-200 dark:bg-darkCard dark:border-gray-700">
             <!-- Name -->
             <div class="relative z-0 w-full group">
                 <input type="text" name="name" id="name" required
-                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400" />
+                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 px-0 text-lg text-gray-900 focus:outline-none focus:ring-0 focus:border-primary transition-colors duration-300 dark:border-gray-600 dark:text-lightText" />
                 <label for="name"
-                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                       class="absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-primary dark:text-subtleText">
                     Your Name
                 </label>
             </div>
@@ -504,9 +559,9 @@
             <!-- Email -->
             <div class="relative z-0 w-full group">
                 <input type="email" name="email" id="email" required
-                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400" />
+                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 px-0 text-lg text-gray-900 focus:outline-none focus:ring-0 focus:border-primary transition-colors duration-300 dark:border-gray-600 dark:text-lightText" />
                 <label for="email"
-                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                       class="absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-primary dark:text-subtleText">
                     Your Email
                 </label>
             </div>
@@ -514,29 +569,29 @@
             <!-- Subject -->
             <div class="relative z-0 w-full group md:col-span-2">
                 <input type="text" name="subject" id="subject"
-                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400" />
+                       class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 px-0 text-lg text-gray-900 focus:outline-none focus:ring-0 focus:border-primary transition-colors duration-300 dark:border-gray-600 dark:text-lightText" />
                 <label for="subject"
-                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                       class="absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-primary dark:text-subtleText">
                     Subject
                 </label>
             </div>
 
             <!-- Message -->
             <div class="relative z-0 w-full group md:col-span-2">
-        <textarea name="message" id="message" rows="5" required
-                  class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 dark:border-gray-600 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-0 focus:border-blue-600 dark:focus:border-blue-400 resize-none"></textarea>
+        <textarea name="message" id="message" rows="6" required
+                  class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-3 px-0 text-lg text-gray-900 focus:outline-none focus:ring-0 focus:border-primary resize-none transition-colors duration-300 dark:border-gray-600 dark:text-lightText"></textarea>
                 <label for="message"
-                       class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-blue-600 dark:peer-focus:text-blue-400">
+                       class="absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 origin-[0] peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:scale-75 peer-focus:-translate-y-6 peer-focus:text-primary dark:text-subtleText">
                     Your Message
                 </label>
             </div>
 
             <!-- Submit Button -->
-            <div class="md:col-span-2 flex justify-center">
+            <div class="md:col-span-2 flex justify-center mt-6">
                 <button type="submit"
-                        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-8 py-3 rounded-md transition focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-700">
+                        class="inline-flex items-center gap-3 bg-primary hover:bg-secondary text-white font-bold px-10 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-primary/50">
                     Send Message
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor"
                          stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M5 13l4 4L19 7" />
                     </svg>
@@ -549,65 +604,62 @@
 
 <!-- FOOTER -->
 <footer
-        class="bg-gray-900 text-gray-300 dark:bg-gray-950 dark:text-gray-400 py-16 px-6 select-none"
+        class="bg-gray-900 text-gray-400 py-16 px-6 select-none border-t border-gray-800 dark:bg-darkerBg dark:text-subtleText"
         role="contentinfo"
 >
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         <!-- About -->
         <div>
-            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">NEB Notes</h3>
-            <p class="text-gray-400 dark:text-gray-500 leading-relaxed">
+            <h3 class="text-2xl font-bold text-primary mb-4">NEB Notes</h3>
+            <p class="text-gray-500 leading-relaxed text-base">
                 Your go-to hub for Grade 12 NEB Computer Science notes and question
-                sets.
-                <br />
-                Developed by <span class="text-blue-500">Prasun Tripathi</span> &
-                designed by <span class="text-blue-500">Prabhas Budathoki</span>.
+                sets. Empowering Nepali students with accessible and organized learning resources.
             </p>
         </div>
 
         <!-- Quick Links -->
         <nav aria-label="Footer Navigation">
-            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">Quick Links</h3>
+            <h3 class="text-xl font-bold text-primary mb-4">Quick Links</h3>
             <ul class="space-y-3">
                 <li>
                     <a
                             href="/"
-                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                     >Home</a
                     >
                 </li>
                 <li>
                     <a
                             href="/about"
-                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                     >About</a
                     >
                 </li>
                 <li>
                     <a
                             href="/notes"
-                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                     >Notes</a
                     >
                 </li>
                 <li>
                     <a
                             href="/questions"
-                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                     >Questions</a
                     >
                 </li>
                 <li>
                     <a
                             href="/login"
-                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                     >Login</a
                     >
                 </li>
                 <li>
                     <a
                             href="/register"
-                            class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                     >Register</a
                     >
                 </li>
@@ -616,14 +668,14 @@
 
         <!-- Contact -->
         <address class="not-italic space-y-2 text-gray-400">
-            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">Contact Us</h3>
+            <h3 class="text-xl font-bold text-primary mb-4">Contact Us</h3>
             <p>📍 Kathmandu, Nepal</p>
             <p>📞 +977 9800000000</p>
             <p>
                 ✉️
                 <a
                         href="mailto:quicknotes2008@gmail.com"
-                        class="hover:text-blue-500 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                        class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
                 >quicknotes2008@gmail.com</a
                 >
             </p>
@@ -631,110 +683,140 @@
 
         <!-- Social -->
         <div>
-            <h3 class="text-xl font-bold text-white dark:text-blue-400 mb-4">Follow Us</h3>
+            <h3 class="text-xl font-bold text-primary mb-4">Follow Us</h3>
             <div class="flex space-x-6">
                 <a
                         href="#"
                         aria-label="Facebook"
-                        class="hover:text-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                        class="text-gray-400 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1"
                 >
                     <svg
-                            class="w-6 h-6 fill-current"
+                            class="w-7 h-7"
+                            fill="currentColor"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
                     >
                         <path
-                                d="M22 12a10 10 0 10-11.6 9.8v-6.9h-2.9v-2.9h2.9v-2.2c0-2.9 1.7-4.5 4.2-4.5 1.2 0 2.5.2 2.5.2v2.7h-1.4c-1.4 0-1.8.9-1.8 1.8v2h3l-.5 2.9h-2.5v6.9A10 10 0 0022 12z"
+                                fill-rule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z"
+                                clip-rule="evenodd"
                         />
                     </svg>
                 </a>
                 <a
                         href="#"
                         aria-label="Twitter"
-                        class="hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                        class="text-gray-400 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1"
                 >
                     <svg
-                            class="w-6 h-6 fill-current"
+                            class="w-7 h-7"
+                            fill="currentColor"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
                     >
                         <path
-                                d="M22.46 6c-.77.34-1.6.58-2.46.69a4.3 4.3 0 001.88-2.37 8.6 8.6 0 01-2.72 1.04 4.28 4.28 0 00-7.3 3.9 12.17 12.17 0 01-8.83-4.48 4.27 4.27 0 001.33 5.71 4.24 4.24 0 01-1.94-.54v.05a4.28 4.28 0 003.44 4.2 4.29 4.29 0 01-1.93.07 4.28 4.28 0 003.99 2.97A8.6 8.6 0 012 19.54a12.15 12.15 0 006.57 1.92c7.88 0 12.2-6.53 12.2-12.2 0-.18 0-.35-.01-.53A8.66 8.66 0 0022.46 6z"
-                        />
-                    </svg>
-                </a>
-                <a
-                        href="#"
-                        aria-label="Instagram"
-                        class="hover:text-pink-500 transition focus:outline-none focus:ring-2 focus:ring-pink-400 rounded"
-                >
-                    <svg
-                            class="w-6 h-6 fill-current"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                    >
-                        <path
-                                d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5a4.25 4.25 0 00-4.25 4.25v8.5a4.25 4.25 0 004.25 4.25h8.5a4.25 4.25 0 004.25-4.25v-8.5a4.25 4.25 0 00-4.25-4.25h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm4.75-2.75a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5z"
+                                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 014 9.659v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.251c-.542 0-1.07-.06-1.583-.141a11.62 11.62 0 006.29 1.84"
                         />
                     </svg>
                 </a>
                 <a
                         href="#"
                         aria-label="LinkedIn"
-                        class="hover:text-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                        class="text-gray-400 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1"
                 >
                     <svg
-                            class="w-6 h-6 fill-current"
+                            class="w-7 h-7"
+                            fill="currentColor"
                             viewBox="0 0 24 24"
                             aria-hidden="true"
                     >
                         <path
-                                d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.93v5.68h-3.55V9h3.41v1.56h.05a3.74 3.74 0 013.37-1.85c3.6 0 4.27 2.37 4.27 5.45v6.3zM5.34 7.43a2.06 2.06 0 11.01-4.12 2.06 2.06 0 01-.01 4.12zM6.7 20.45H3.97V9h2.73v11.45z"
+                                fill-rule="evenodd"
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                clip-rule="evenodd"
                         />
                     </svg>
                 </a>
             </div>
         </div>
     </div>
-    <div
-            class="border-t border-gray-700 dark:border-gray-800 mt-12 pt-8 text-center text-gray-500 dark:text-gray-500 text-sm"
-    >
-        &copy; 2025 NEB Notes. All rights reserved.
-    </div>
 
+    <div
+            class="mt-16 text-center text-gray-600 text-sm"
+    >
+        &copy; 2024 NEB Notes. All rights reserved.
+    </div>
 </footer>
 
-<!-- Theme toggle and mobile menu JavaScript -->
 <script>
-    const htmlElement = document.documentElement;
+    // Theme toggle functionality
     const themeToggle = document.getElementById('theme-toggle');
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const htmlElement = document.documentElement;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
 
-    // Initialize theme based on localStorage or default to dark
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'light') {
-        htmlElement.classList.remove('dark');
-    } else {
-        // Default to dark if no theme is saved or if it's 'dark'
-        htmlElement.classList.add('dark');
+    // Function to apply theme and update icons
+    function applyTheme(isDarkMode) {
+        if (isDarkMode) {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
     }
 
-    // Theme toggle functionality
-    themeToggle.addEventListener('click', () => {
-        if (htmlElement.classList.contains('dark')) {
-            htmlElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
+    // Initial theme setup on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        let shouldBeDarkMode;
+
+        if (savedTheme === 'light') {
+            shouldBeDarkMode = false;
+        } else if (savedTheme === 'dark') {
+            shouldBeDarkMode = true;
         } else {
-            htmlElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+            // If no saved preference, default to dark mode
+            shouldBeDarkMode = true;
         }
+
+        applyTheme(shouldBeDarkMode);
+    });
+
+    // Event listener for theme toggle button
+    themeToggle.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default button behavior if any
+        const isCurrentlyDark = htmlElement.classList.contains('dark');
+        const newThemeIsDark = !isCurrentlyDark;
+        applyTheme(newThemeIsDark);
+        localStorage.setItem('theme', newThemeIsDark ? 'dark' : 'light');
+
+        // Add a temporary rotation animation to the clicked icon for visual feedback
+        const iconToAnimate = newThemeIsDark ? sunIcon : moonIcon; // Animate the icon that becomes visible
+        iconToAnimate.classList.add('animate-rotate-icon');
+        iconToAnimate.addEventListener('animationend', () => {
+            iconToAnimate.classList.remove('animate-rotate-icon');
+        }, { once: true });
     });
 
     // Mobile menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
     menuToggle.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        menuToggle.setAttribute('aria-expanded', String(!isHidden));
+        mobileMenu.classList.toggle('hidden');
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+        menuToggle.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
     });
 </script>
 

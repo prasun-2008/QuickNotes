@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark"> <!-- HTML tag defaults to dark mode -->
 <head>
     <meta charset="UTF-8" />
     <title>About - NEB Notes | Founded by Prasun Tripathi</title>
@@ -36,16 +36,53 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#2563eb',
+                        primary: '#6366f1', // Indigo 500
+                        secondary: '#818cf8', // Indigo 400
+                        accent: '#a78bfa', // Violet 400 - for highlights
+                        darkBg: '#0f172a', // Slate 900 - very dark background
+                        darkerBg: '#020617', // Slate 950 - even darker for footer
+                        darkCard: '#1e293b', // Slate 800 - for card backgrounds
+                        darkText: '#e2e8f0', // Slate 200 - light text
+                        lightText: '#f8fafc', // Slate 50 - pure white text for contrast
+                        subtleText: '#94a3b8', // Slate 400 - for secondary text
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     },
                     keyframes: {
-                        fadeSlideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(15px)' },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
+                        },
+                        fadeInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        fadeInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(20px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { 'box-shadow': '0 0 0px rgba(99, 102, 241, 0)' },
+                            '50%': { 'box-shadow': '0 0 15px rgba(99, 102, 241, 0.6)' },
+                        },
+                        rotateIcon: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
+                        },
                     },
                     animation: {
-                        fadeSlideUp: 'fadeSlideUp 0.7s ease forwards',
+                        fadeSlideUp: 'fadeInUp 0.7s ease forwards', // Renamed for consistency with new keyframes
+                        'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
+                        'fade-in-left': 'fadeInLeft 0.7s ease-out forwards',
+                        'fade-in-right': 'fadeInRight 0.7s ease-out forwards',
+                        'scale-in': 'scaleIn 0.6s ease-out forwards',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'rotate-icon': 'rotateIcon 0.3s ease-out',
                     },
                 },
             },
@@ -84,47 +121,80 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
-<body class="dark bg-gray-900 text-gray-100 font-sans selection:bg-primary selection:text-white">
+<body class="bg-white text-gray-800 font-sans antialiased transition-colors duration-500 dark:bg-darkBg dark:text-darkText selection:bg-primary selection:text-white">
 
 <!-- NAVBAR -->
 <header
-        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur shadow-md"
+        class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-xl border-b border-gray-200 dark:bg-darkBg/90 dark:border-gray-800"
         role="banner"
 >
     <div
-            class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
+            class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"
     >
         <!-- Brand -->
         <a
                 href="/"
-                class="text-2xl font-extrabold text-primary dark:text-blue-400 tracking-tight focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="text-3xl sm:text-4xl font-extrabold text-primary tracking-tight hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
         >NEB Notes</a
         >
 
-        <!-- Hamburger Button -->
-        <button
-                id="menu-toggle"
-                aria-controls="mobile-menu"
-                aria-expanded="false"
-                class="md:hidden text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-primary rounded"
-                aria-label="Toggle menu"
-        >
-            <svg
-                    class="w-7 h-7"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
+        <!-- Hamburger Button and Theme Toggle -->
+        <div class="flex items-center gap-4">
+            <button
+                    id="theme-toggle"
+                    aria-label="Toggle dark/light theme"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-2 bg-gray-100 hover:bg-primary/20 shadow-md dark:text-darkText dark:bg-darkCard"
             >
-                <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-            </svg>
-        </button>
+                <!-- Sun Icon - Initially displayed if dark mode is active -->
+                <svg
+                        id="sun-icon"
+                        class="w-6 h-6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h1M2 12h1m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <!-- Moon Icon - Initially hidden if dark mode is active -->
+                <svg
+                        id="moon-icon"
+                        class="w-6 h-6 hidden"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+
+            <button
+                    id="menu-toggle"
+                    aria-controls="mobile-menu"
+                    aria-expanded="false"
+                    class="md:hidden text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-1 dark:text-darkText"
+                    aria-label="Toggle menu"
+            >
+                <svg
+                        class="w-7 h-7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                >
+                    <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4 6h16M4 12h16M4 18h16"
+                    ></path>
+                </svg>
+            </button>
+        </div>
 
         <!-- Desktop Nav -->
         <nav
@@ -134,28 +204,28 @@
         >
             <a
                     href="/"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >Home</a
             >
             <a
                     href="/about"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >About</a
             >
             <a
                     href="/notes"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >Notes</a
             >
             <a
                     href="/questions"
-                    class="hover:text-primary dark:hover:text-blue-400 transition focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                    class="text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md px-3 py-1 dark:text-darkText"
             >Questions</a
             >
 
             <a
                     href="register"
-                    class="px-5 py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+                    class="px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-secondary shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
             >Register</a
             >
         </nav>
@@ -164,103 +234,88 @@
     <!-- Mobile Menu -->
     <nav
             id="mobile-menu"
-            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium"
+            class="md:hidden hidden flex-col gap-2 px-6 pb-6 text-lg font-medium bg-white/95 shadow-inner dark:bg-darkBg/95"
             role="navigation"
             aria-label="Mobile Navigation"
     >
         <a
                 href="/"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >Home</a
         >
         <a
                 href="/about"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >About</a
         >
         <a
                 href="/notes"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md dark:text-darkText"
         >Notes</a
         >
         <a
                 href="/questions"
-                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded"
+                class="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
         >Questions</a
         >
         <a
                 href="/login"
-                class="block py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition focus:outline-none focus:ring-2 focus:ring-primary"
+                class="block py-2 border border-primary text-primary rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary mt-2"
         >Login</a
         >
         <a
                 href="/register"
-                class="block py-2 bg-primary text-white rounded hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition focus:outline-none focus:ring-2 focus:ring-primary"
+                class="block py-2 bg-primary text-white rounded-lg hover:bg-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary mt-2"
         >Register</a
         >
     </nav>
 </header>
 
-<!-- Minimal JS for mobile toggle -->
-<script>
-    const toggleButton = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    toggleButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.toggle('hidden');
-        toggleButton.setAttribute('aria-expanded', String(!isHidden));
-    });
-</script>
-
-
 <!-- MAIN CONTENT -->
 <main class="max-w-7xl mx-auto px-6 pt-28 pb-20 space-y-40">
 
     <!-- Hero Section -->
-    <section class="max-w-4xl mx-auto text-center space-y-6 animate-fadeSlideUp" style="animation-delay: 0.2s;">
-        <h1 class="text-6xl font-extrabold text-primary leading-tight select-none drop-shadow-lg">About NEB Notes</h1>
-        <p class="text-xl text-gray-300 font-semibold max-w-3xl mx-auto leading-relaxed tracking-wide">
+    <section class="max-w-4xl mx-auto text-center space-y-6 animate-fade-in-up" style="animation-delay: 0.2s;">
+        <h1 class="text-6xl font-extrabold text-gray-900 leading-tight select-none drop-shadow-lg dark:text-lightText">About NEB Notes</h1>
+        <p class="text-xl text-gray-700 font-semibold max-w-3xl mx-auto leading-relaxed tracking-wide dark:text-subtleText">
             Founded by passionate student developers <span class="text-primary underline decoration-primary decoration-2 font-bold">Prasun Tripathi</span> &amp; <span class="text-primary underline decoration-primary decoration-2 font-bold">Prabhas Budathoki</span>, NEB Notes simplifies learning for Class 12 NEB students across Nepal.
         </p>
     </section>
 
     <!-- Mission + Image Section -->
-    <section class="grid md:grid-cols-2 gap-20 items-center max-w-5xl mx-auto animate-fadeSlideUp" style="animation-delay: 0.4s;">
-        <div class="space-y-8 text-gray-300">
+    <section class="grid md:grid-cols-2 gap-20 items-center max-w-5xl mx-auto animate-fade-in-up" style="animation-delay: 0.4s;">
+        <div class="space-y-8 text-gray-800 dark:text-subtleText">
             <p class="text-lg font-medium leading-relaxed">
                 Our mission is to provide <span class="text-primary font-bold">organized</span>, <span class="text-primary font-bold">syllabus-based</span>, and <span class="text-primary font-bold">easy-to-understand</span> notes and model questions.
             </p>
             <p class="tracking-wide">
                 From beautiful design to practical functionality, every feature is crafted with NEB students in mind to help them study better, faster, and with more confidence.
             </p>
-            <a href="/notes" class="inline-block mt-6 px-10 py-3 bg-gradient-to-r from-primary to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:from-blue-700 hover:to-primary transition">
+            <a href="/notes" class="inline-block mt-6 px-10 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg shadow-lg hover:from-secondary hover:to-primary transition transform hover:-translate-y-1">
                 Explore Notes & Questions
             </a>
         </div>
-        <div class="relative">
+        <div class="relative animate-fade-in-right delay-200">
             <!-- Image with onerror fallback -->
             <img
                     src="/images/hero.png"
                     alt="Students learning"
                     loading="lazy"
-                    class="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 ease-in-out"
-                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/2563eb/ffffff?text=Image+Not+Found';"
+                    class="rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500 ease-in-out border-4 border-accent"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/e2e8f0?text=About+Image';"
             />
             <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-primary rounded-full opacity-30 blur-3xl mix-blend-multiply pointer-events-none"></div>
         </div>
     </section>
 
-    <!-- Ad script - Retained as per original request -->
-    <script async="async" data-cfasync="false" src="//pl27008957.profitableratecpm.com/d53e3af1da27dd183b6eede90e96a6cc/invoke.js"></script>
-    <div id="container-d53e3af1da27dd183b6eede90e96a6cc"></div>
 
     <!-- Developers Cards Section -->
-    <section class="bg-gray-800 rounded-3xl p-12 max-w-6xl mx-auto shadow-xl animate-fadeSlideUp" style="animation-delay: 0.6s;">
-        <h2 class="text-4xl font-extrabold text-primary text-center mb-14 select-none drop-shadow-lg">Meet the Developers</h2>
+    <section class="bg-gray-100 rounded-3xl p-12 max-w-6xl mx-auto shadow-xl animate-fade-in-up dark:bg-darkCard" style="animation-delay: 0.6s;">
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-14 select-none drop-shadow-lg dark:text-lightText">Meet the <span class="text-primary">Developers</span></h2>
         <div class="flex flex-col md:flex-row justify-center gap-12">
             <!-- Prasun Tripathi Card -->
             <div
-                    class="bg-gray-900 rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer"
+                    class="bg-white rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer border border-gray-200 dark:bg-darkBg dark:border-gray-700"
                     tabindex="0"
             >
                 <!-- Avatar with onerror fallback -->
@@ -269,17 +324,17 @@
                         alt="Prasun Tripathi"
                         loading="lazy"
                         class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg"
-                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PT';"
+                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/6366f1/f8fafc?text=PT';"
                 />
-                <h3 class="text-2xl font-semibold mb-1 text-gray-100">Prasun Tripathi</h3>
+                <h3 class="text-2xl font-semibold mb-1 text-gray-900 dark:text-lightText">Prasun Tripathi</h3>
                 <p class="text-primary font-semibold mb-3">Full-stack Developer • Age 17</p>
-                <p class="text-gray-300 leading-relaxed tracking-wide">
+                <p class="text-gray-700 leading-relaxed tracking-wide dark:text-subtleText">
                     Backend-focused, passionate about seamless development and building student-centered tools.
                 </p>
             </div>
             <!-- Prabhas Budathoki Card -->
             <div
-                    class="bg-gray-900 rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer"
+                    class="bg-white rounded-2xl shadow-lg p-8 text-center max-w-sm mx-auto hover:shadow-2xl hover:scale-[1.05] transition-transform duration-300 cursor-pointer border border-gray-200 dark:bg-darkBg dark:border-gray-700"
                     tabindex="0"
             >
                 <!-- Avatar with onerror fallback -->
@@ -288,11 +343,11 @@
                         alt="Prabhas Budathoki"
                         loading="lazy"
                         class="w-28 h-28 rounded-full mx-auto mb-6 ring-4 ring-primary ring-opacity-40 shadow-lg"
-                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/2563eb/ffffff?text=PB';"
+                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/6366f1/f8fafc?text=PB';"
                 />
-                <h3 class="text-2xl font-semibold mb-1 text-gray-100">Prabhas Budathoki</h3>
+                <h3 class="text-2xl font-semibold mb-1 text-gray-900 dark:text-lightText">Prabhas Budathoki</h3>
                 <p class="text-primary font-semibold mb-3">UI Designer & Developer • Age 16</p>
-                <p class="text-gray-300 leading-relaxed tracking-wide">
+                <p class="text-gray-700 leading-relaxed tracking-wide dark:text-subtleText">
                     Loves clean UI, mobile-first design, and turning code into visually engaging experiences.
                 </p>
             </div>
@@ -301,25 +356,25 @@
 
     <!-- Testimonials Section -->
     <section class="max-w-7xl mx-auto py-20 px-6">
-        <h2 class="text-4xl font-extrabold text-primary text-center mb-16 select-none drop-shadow-md">What Users Say</h2>
+        <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-16 select-none drop-shadow-md dark:text-lightText">What Users <span class="text-primary">Say</span></h2>
         <div class="grid gap-10 md:grid-cols-3">
             <!-- Testimonial 1 -->
-            <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
-                <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
+            <blockquote class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text border border-gray-200 dark:bg-darkCard dark:border-gray-700">
+                <p class="italic text-gray-700 mb-6 leading-relaxed tracking-wide dark:text-subtleText">
                     "NEB Notes helped me so much during exam prep! The notes are simple and to the point."
                 </p>
                 <footer class="text-primary font-semibold text-lg">— Rojit Khadka</footer>
             </blockquote>
             <!-- Testimonial 2 (Corrected branding) -->
-            <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
-                <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
+            <blockquote class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text border border-gray-200 dark:bg-darkCard dark:border-gray-700">
+                <p class="italic text-gray-700 mb-6 leading-relaxed tracking-wide dark:text-subtleText">
                     "I never thought studying Computer Science could be this easy. Thank you NEB Notes!"
                 </p>
                 <footer class="text-primary font-semibold text-lg">— Puspa Kamal Gautam</footer>
             </blockquote>
             <!-- Testimonial 3 -->
-            <blockquote class="bg-gray-800 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text">
-                <p class="italic text-gray-300 mb-6 leading-relaxed tracking-wide">
+            <blockquote class="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 text-center cursor-default select-text border border-gray-200 dark:bg-darkCard dark:border-gray-700">
+                <p class="italic text-gray-700 mb-6 leading-relaxed tracking-wide dark:text-subtleText">
                     "Everything I needed for Class 12 was here. Highly recommend to all NEB students."
                 </p>
                 <footer class="text-primary font-semibold text-lg">— Riwaz Nepal</footer>
@@ -330,52 +385,219 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="bg-gray-900 text-gray-400 py-12 mt-20">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between px-8 gap-16">
+<footer class="bg-gray-900 text-gray-400 py-16 px-6 select-none border-t border-gray-800 dark:bg-darkerBg dark:text-subtleText">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- About -->
         <div>
-            <!-- Corrected branding from QuickNotes to NEB Notes -->
-            <h3 class="text-blue-400 font-extrabold text-2xl mb-3 select-none">NEB Notes</h3>
-            <p class="max-w-xs font-light leading-relaxed tracking-wide">
-                Empowering Nepali students with digital tools to unlock their potential.
+            <h3 class="text-2xl font-bold text-primary mb-4">NEB Notes</h3>
+            <p class="text-gray-500 leading-relaxed text-base">
+                Your go-to hub for Grade 12 NEB Computer Science notes and question
+                sets. Empowering Nepali students with accessible and organized learning resources.
             </p>
-            <p class="mt-6 text-sm opacity-70">&copy; 2025 NEB Notes. All rights reserved.</p>
         </div>
+
+        <!-- Quick Links -->
+        <nav aria-label="Footer Navigation">
+            <h3 class="text-xl font-bold text-primary mb-4">Quick Links</h3>
+            <ul class="space-y-3">
+                <li>
+                    <a
+                            href="/"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                    >Home</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/about"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                    >About</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/notes"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                    >Notes</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/questions"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                    >Questions</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/login"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                    >Login</a
+                    >
+                </li>
+                <li>
+                    <a
+                            href="/register"
+                            class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                    >Register</a
+                    >
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contact -->
+        <address class="not-italic space-y-2 text-gray-400">
+            <h3 class="text-xl font-bold text-primary mb-4">Contact Us</h3>
+            <p>📍 Kathmandu, Nepal</p>
+            <p>📞 +977 9800000000</p>
+            <p>
+                ✉️
+                <a
+                        href="mailto:quicknotes2008@gmail.com"
+                        class="hover:text-secondary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
+                >quicknotes2008@gmail.com</a
+                >
+            </p>
+        </address>
+
+        <!-- Social -->
         <div>
-            <h4 class="text-blue-400 font-semibold mb-3">Contact</h4>
-            <!-- Aligned displayed email with href -->
-            <p class="font-light">Email: <a href="mailto:quicknotes2008@gmail.com" class="hover:text-primary transition">quicknotes2008@gmail.com</a></p>
-            <p class="font-light">Phone: <a href="tel:+9779800000000" class="hover:text-primary transition">+977 9800000000</a></p>
-        </div>
-        <div>
-            <h4 class="text-blue-400 font-semibold mb-3">Follow Us</h4>
-            <div class="flex space-x-6 text-3xl">
-                <a href="#" aria-label="Facebook" class="text-blue-600 hover:text-blue-700 transition transform hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
-                        <path d="M22.675 0h-21.35c-.733 0-1.325.592-1.325 1.325v21.351c0 .733.592 1.324 1.325 1.324h11.495v-9.294h-3.124v-3.622h3.124v-2.671c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.311h3.588l-.467 3.622h-3.121V24h6.116c.732 0 1.324-.591 1.324-1.324V1.325c0-.733-.592-1.325-1.325-1.325z" />
+            <h3 class="text-xl font-bold text-primary mb-4">Follow Us</h3>
+            <div class="flex space-x-6">
+                <a
+                        href="#"
+                        aria-label="Facebook"
+                        class="text-gray-400 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1"
+                >
+                    <svg
+                            class="w-7 h-7"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                fill-rule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z"
+                                clip-rule="evenodd"
+                        />
                     </svg>
                 </a>
-                <a href="#" aria-label="Twitter" class="text-sky-400 hover:text-sky-500 transition transform hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
-                        <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.611 1.794-1.574 2.163-2.723-.95.562-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-2.723 0-4.928 2.205-4.928 4.928 0 .39.045.765.127 1.124-4.09-.205-7.719-2.165-10.148-5.144-.424.728-.666 1.574-.666 2.476 0 1.71.87 3.214 2.188 4.096-.807-.026-1.566-.247-2.228-.616v.061c0 2.385 1.693 4.374 3.946 4.827-.413.111-.849.171-1.296.171-.317 0-.626-.03-.928-.086.627 1.956 2.444 3.379 4.6 3.419-1.68 1.317-3.808 2.104-6.115 2.104-.398 0-.79-.023-1.175-.069 2.179 1.397 4.768 2.214 7.557 2.214 9.054 0 14-7.496 14-13.986 0-.21 0-.42-.015-.63.962-.695 1.797-1.562 2.457-2.549z" />
+                <a
+                        href="#"
+                        aria-label="Twitter"
+                        class="text-gray-400 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1"
+                >
+                    <svg
+                            class="w-7 h-7"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 014 9.659v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.251c-.542 0-1.07-.06-1.583-.141a11.62 11.62 0 006.29 1.84"
+                        />
                     </svg>
                 </a>
-                <a href="#" aria-label="Instagram" class="text-pink-500 hover:text-pink-600 transition transform hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="w-7 h-7">
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                        <path d="M16 11.37a4 4 0 11-8 0 4 4 0 018 0z" />
-                        <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
-                    </svg>
-                </a>
-                <a href="#" aria-label="LinkedIn" class="text-blue-700 hover:text-blue-800 transition transform hover:scale-110">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-7 h-7">
-                        <path d="M4.98 3.5C4.98 2.12 6.09 1 7.48 1s2.5 1.12 2.5 2.5-1.11 2.5-2.5 2.5S4.98 4.88 4.98 3.5zM2 8h6v12H2zM9 8h5.5v1.73h.08c.77-1.46 2.66-3 5.47-3 5.85 0 6.93 3.85 6.93 8.86V20H19v-7c0-1.67-.03-3.82-2.33-3.82-2.34 0-2.7 1.82-2.7 3.7V20H9z" />
+                <a
+                        href="#"
+                        aria-label="LinkedIn"
+                        class="text-gray-400 hover:text-primary transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1"
+                >
+                    <svg
+                            class="w-7 h-7"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path
+                                fill-rule="evenodd"
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                clip-rule="evenodd"
+                        />
                     </svg>
                 </a>
             </div>
         </div>
     </div>
+
+    <div
+            class="mt-16 text-center text-gray-600 text-sm"
+    >
+        &copy; 2024 NEB Notes. All rights reserved.
+    </div>
 </footer>
 
+<script>
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    // Function to apply theme and update icons
+    function applyTheme(isDarkMode) {
+        if (isDarkMode) {
+            htmlElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        } else {
+            htmlElement.classList.remove('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        }
+    }
+
+    // Initial theme setup on DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        let shouldBeDarkMode;
+
+        if (savedTheme === 'light') {
+            shouldBeDarkMode = false;
+        } else if (savedTheme === 'dark') {
+            shouldBeDarkMode = true;
+        } else {
+            // If no saved preference, default to dark mode
+            shouldBeDarkMode = true;
+        }
+
+        applyTheme(shouldBeDarkMode);
+    });
+
+    // Event listener for theme toggle button
+    themeToggle.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent default button behavior if any
+        const isCurrentlyDark = htmlElement.classList.contains('dark');
+        const newThemeIsDark = !isCurrentlyDark;
+        applyTheme(newThemeIsDark);
+        localStorage.setItem('theme', newThemeIsDark ? 'dark' : 'light');
+
+        // Add a temporary rotation animation to the clicked icon for visual feedback
+        const iconToAnimate = newThemeIsDark ? sunIcon : moonIcon; // Animate the icon that becomes visible
+        iconToAnimate.classList.add('animate-rotate-icon');
+        iconToAnimate.addEventListener('animationend', () => {
+            iconToAnimate.classList.remove('animate-rotate-icon');
+        }, { once: true });
+    });
+
+    // Mobile menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+        menuToggle.setAttribute('aria-expanded', !expanded);
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+</script>
 
 </body>
 </html>

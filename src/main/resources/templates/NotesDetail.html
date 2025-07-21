@@ -1,68 +1,180 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8" />
-    <title th:text="${note.title} + ' - NEB Notes'">NEB Notes</title>
+    <title th:text="${note.title} + ' - QuickNotes'">QuickNotes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" th:content="${note.description} ?: 'View and share detailed notes for NEB exams on QuickNotes. Your ultimate study companion.'">
+    <meta name="keywords" th:content="${note.title} ? ${note.title} + ', NEB Notes, QuickNotes, Study Material, Exam Prep, Nepal Education Board' : 'NEB Notes, QuickNotes, Study Material, Exam Prep, Nepal Education Board'">
+
+
+    <!-- Open Graph / Facebook Meta Tags (for rich sharing previews) -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" th:content="${note.title} + ' - QuickNotes'">
+    <meta property="og:description" th:content="${note.description} ?: 'View and share detailed notes for NEB exams on QuickNotes. Your ultimate study companion.'">
+    <!-- Open Graph Image -->
+    <meta property="og:image" th:content="@{/images/logo.png}">
+
+    <!-- Google Fonts: Inter for body, Lora for headings -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+        // Set initial dark mode preference based on local storage or system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: 'class', // Enable dark mode based on 'dark' class on <html>
             theme: {
                 extend: {
-                    colors: {
-                        primary: '#2563eb',
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Default sans-serif font
+                        serif: ['Lora', 'serif'],    // For headings or specific elements
                     },
+                    colors: {
+                        primary: '#2563eb', // A vibrant blue
+                        secondary: '#10b981', // A complementary green for accents
+                        darkBg: '#1a202c', // Dark background for dark mode
+                        darkText: '#e2e8f0', // Light text for dark mode
+                        darkCard: '#2d3748', // Slightly lighter dark background for cards
+                    },
+                    boxShadow: {
+                        'custom-light': '0 4px 15px rgba(0, 0, 0, 0.08)',
+                        'custom-dark': '0 4px 15px rgba(0, 0, 0, 0.3)',
+                    }
                 },
             },
         }
     </script>
+    <style>
+        /* Custom styles for subtle background pattern */
+        body.dark {
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        body:not(.dark) {
+            background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.02) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+
+        /* Fade-in animation for main content */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 font-sans flex flex-col min-h-screen">
+<body class="bg-gray-50 dark:bg-darkBg text-gray-800 dark:text-darkText font-sans flex flex-col min-h-screen transition-colors duration-300">
 
 <!-- NAVBAR -->
-<header class="sticky top-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm shadow-sm">
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-darkBg/90 backdrop-blur-sm shadow-custom-light dark:shadow-custom-dark border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
     <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="/" class="text-xl font-bold text-primary dark:text-blue-400">QuickNotes</a>
+        <a href="/" class="text-2xl font-bold font-serif text-primary dark:text-blue-400 hover:text-secondary dark:hover:text-secondary transition-colors duration-200" aria-label="QuickNotes Home">QuickNotes</a>
         <nav class="flex items-center gap-4 text-base font-medium">
-            <!-- Notes link hidden on xs screens already -->
-            <a href="/notes" class="hover:text-primary dark:hover:text-blue-400 hidden sm:inline">Notes</a>
-            <a href="/login" class="px-3 py-1.5 text-sm border border-primary text-primary rounded hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500">Login</a>
+            <a href="/notes" class="hover:text-primary dark:hover:text-blue-400 hidden sm:inline transition-colors duration-200" aria-label="View all notes">Notes</a>
+            <a href="/login" class="px-4 py-2 text-sm font-semibold border border-primary text-primary rounded-lg hover:bg-primary hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-500 dark:hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-md hover:shadow-lg" aria-label="Login to your account">Login</a>
+            <!-- Dark Mode Toggle Button -->
+            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-blue-400 transition-colors duration-300" aria-label="Toggle dark mode">
+                <i class="fas fa-moon hidden dark:inline-block"></i>
+                <i class="fas fa-sun dark:hidden"></i>
+            </button>
         </nav>
     </div>
 </header>
 
 <!-- MAIN CONTENT -->
-<main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-4 w-full">
-    <div class="mb-4">
-        <h1 class="text-xl sm:text-2xl font-bold text-primary dark:text-blue-400 mb-1" th:text="${note.title}">Note Title</h1>
-        <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base" th:text="${note.description}">Description goes here</p>
+<main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 py-8 w-full fade-in">
+    <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div>
+            <h1 class="text-3xl sm:text-4xl font-bold font-serif text-primary dark:text-blue-400 mb-2 leading-tight" th:text="${note.title}">Note Title</h1>
+            <p class="text-gray-600 dark:text-gray-300 text-base sm:text-lg leading-relaxed" th:text="${note.description}">Description goes here. This section provides a brief overview of the note's content, helping users understand what to expect from the document.</p>
+        </div>
+        <!-- Back to Notes Button & Share Buttons -->
+        <div class="mt-4 sm:mt-0 flex flex-col sm:flex-row items-center gap-3">
+            <a href="/notes" class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-primary dark:text-blue-400 border border-primary dark:border-blue-400 rounded-lg hover:bg-primary hover:text-white dark:hover:bg-blue-500 dark:hover:text-white transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 shadow-sm" aria-label="Back to all notes">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Notes
+            </a>
+            <!-- Share Buttons -->
+            <div class="flex gap-2 mt-3 sm:mt-0">
+                <button id="facebook-share" class="p-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200 shadow-md transform hover:scale-105 active:scale-95" aria-label="Share on Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+                <!-- Add more share buttons as needed -->
+                <!-- <button class="p-2 rounded-lg bg-blue-400 text-white hover:bg-blue-500 transition-colors duration-200 shadow-md transform hover:scale-105 active:scale-95" aria-label="Share on Twitter">
+                    <i class="fab fa-twitter"></i>
+                </button>
+                <button class="p-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors duration-200 shadow-md transform hover:scale-105 active:scale-95" aria-label="Share on WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </button> -->
+            </div>
+        </div>
     </div>
 
     <!-- Document viewer -->
-    <div class="w-full bg-white dark:bg-gray-800 rounded-md overflow-hidden shadow border border-gray-200 dark:border-gray-700">
+    <div class="w-full bg-white dark:bg-darkCard rounded-xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 transform hover:scale-[1.005] transition-transform duration-300 ease-out">
         <iframe
                 th:src="${note.driveEmbedLink}"
-                class="w-full min-h-[300px] sm:min-h-[400px] md:min-h-[480px]"
+                class="w-full min-h-[400px] sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]"
                 frameborder="0"
                 allowfullscreen
                 sandbox="allow-same-origin allow-scripts allow-popups"
                 style="aspect-ratio: 4 / 3;"
+                title="Embedded Document Viewer"
         ></iframe>
     </div>
 
     <!-- Additional content space -->
-    <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
-        <p>Need help? <a href="#" class="text-primary dark:text-blue-400 hover:underline">Contact support</a></p>
+    <div class="mt-8 text-sm text-gray-500 dark:text-gray-400 text-center">
+        <p>Experiencing issues or have questions? <a href="#" class="text-primary dark:text-blue-400 hover:underline font-medium transition-colors duration-200">Contact our support team</a> for assistance.</p>
     </div>
 </main>
+
+<!-- Ad script - kept as is, but consider less intrusive options for better user experience -->
 <script async="async" data-cfasync="false" src="//pl27008957.profitableratecpm.com/d53e3af1da27dd183b6eede90e96a6cc/invoke.js"></script>
 <div id="container-d53e3af1da27dd183b6eede90e96a6cc"></div>
 
 <!-- FOOTER -->
-<footer class="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 p-4 text-center text-xs border-t border-gray-200 dark:border-gray-700">
-    &copy; 2025 QuickNotes. All rights reserved.
+<footer class="bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 p-6 text-center text-sm border-t border-gray-200 dark:border-gray-700 mt-8 transition-colors duration-300">
+    <p>&copy; <span th:text="${#dates.year(#dates.createNow())}">2025</span> QuickNotes. All rights reserved.</p>
+    <p class="mt-2">Made with <span class="text-red-500">&hearts;</span> for students.</p>
 </footer>
+
+<script>
+    // Dark Mode Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    themeToggleBtn.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.theme = 'light';
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.theme = 'dark';
+        }
+    });
+
+    // Facebook Share Button Logic
+    const facebookShareBtn = document.getElementById('facebook-share');
+    if (facebookShareBtn) {
+        facebookShareBtn.addEventListener('click', () => {
+            const pageUrl = encodeURIComponent(window.location.href);
+            const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+            window.open(shareUrl, 'facebook-share-dialog', 'width=626,height=436');
+            return false;
+        });
+    }
+</script>
 
 </body>
 </html>
